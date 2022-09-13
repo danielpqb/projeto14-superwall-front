@@ -5,9 +5,6 @@ import UserContext from "../Context/UserContext";
 
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
-import Balance from "./Screens/Balance";
-import NewIncome from "./Screens/NewIncome";
-import NewSpent from "./Screens/NewSpent";
 
 import { useEffect, useState } from "react";
 
@@ -28,9 +25,7 @@ export default function App() {
             <Route path="/register" element={<Register />}></Route>
             {userData.token ? (
               <>
-                <Route path="/balance" element={<Balance />}></Route>
-                <Route path="/new-income" element={<NewIncome />}></Route>
-                <Route path="/new-spent" element={<NewSpent />}></Route>
+                <Route path="/balance" element={<></>}></Route>
               </>
             ) : (
               <>
@@ -46,7 +41,7 @@ export default function App() {
 
 const Container = styled.div`
   & {
-    background-color: #8c11be;
+    background-color: #38a6f0;
 
     flex-direction: column;
   }
