@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <Container>
       <Icon onClick={() => {}}>
-        <ion-icon name="menu-outline"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
       </Icon>
 
       <InputBox
@@ -29,7 +29,7 @@ export default function Header() {
           navigate("/cart");
         }}
       >
-        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-icon name="person-circle"></ion-icon>
       </Icon>
     </Container>
   );
@@ -47,6 +47,8 @@ const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+
+    z-index: 1;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }

@@ -11,7 +11,7 @@ export default function Footer() {
           navigate("/");
         }}
       >
-        <ion-icon name="home-outline"></ion-icon>
+        <ion-icon name="home"></ion-icon>
       </Icon>
 
       <Icon
@@ -19,7 +19,7 @@ export default function Footer() {
           navigate("/");
         }}
       >
-        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-icon name="notifications"></ion-icon>
       </Icon>
 
       <Icon
@@ -27,7 +27,7 @@ export default function Footer() {
           navigate("/");
         }}
       >
-        <ion-icon name="receipt-outline"></ion-icon>
+        <ion-icon name="receipt"></ion-icon>
       </Icon>
 
       <Icon
@@ -35,7 +35,7 @@ export default function Footer() {
           navigate("/");
         }}
       >
-        <ion-icon name="cart-outline"></ion-icon>
+        <ion-icon name="cart"></ion-icon>
       </Icon>
     </Container>
   );
@@ -53,6 +53,8 @@ const Container = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
+
+    z-index: 1;
 
     box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   }

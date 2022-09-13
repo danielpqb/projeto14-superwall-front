@@ -12,12 +12,17 @@ export default function Product({ productData, onClick }) {
         <h1>{description}</h1>
         <h2>$ {price.toFixed(2)}</h2>
       </Details>
+
+      <AddToCart>
+        <ion-icon name="add-circle"></ion-icon>
+      </AddToCart>
     </Container>
   );
 }
 
 const Container = styled.div`
   & {
+    position: relative;
     flex-direction: column;
 
     width: calc(50% - 10px);
@@ -83,5 +88,21 @@ const Details = styled.div`
     font-family: "Roboto";
     font-weight: bold;
     font-size: 16px;
+  }
+`;
+
+const AddToCart = styled.div`
+  & {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    width: 30px;
+    height: 30px;
+  }
+
+  ion-icon {
+    font-size: 30px;
+    color: #065183;
   }
 `;
