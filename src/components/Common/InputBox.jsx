@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function InputBox({ name, placeholder, onChange, value, type }) {
+export default function InputBox({
+  name,
+  placeholder,
+  onChange,
+  value,
+  type,
+  height,
+}) {
   return (
-    <Container>
+    <Container height={height}>
       <input
         type={type ? type : "text"}
         placeholder={placeholder}
@@ -21,7 +28,7 @@ const Container = styled.div`
     background: #ffffff;
     border-radius: 5px;
 
-    height: 60px;
+    height: ${({ height }) => (height ? height : "60px")};
 
     margin: 10px 0px;
   }

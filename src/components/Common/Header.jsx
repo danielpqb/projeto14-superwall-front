@@ -1,23 +1,35 @@
-import { useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import UserContext from "../../Context/UserContext";
+import InputBox from "./InputBox";
 
-export default function Header({ children }) {
-  const { setUserData } = useContext(UserContext);
-
+export default function Header() {
   const navigate = useNavigate();
+
+  const [search, setSearch] = useState("");
 
   return (
     <Container>
-      <h1>{children}</h1>
+      <Icon onClick={() => {}}>
+        <ion-icon name="menu-outline"></ion-icon>
+      </Icon>
+
+      <InputBox
+        name={"search"}
+        placeholder={"Pesquisar"}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+        value={search}
+        height={"40px"}
+      />
+
       <Icon
         onClick={() => {
-          setUserData({ token: null });
-          navigate("/");
+          navigate("/cart");
         }}
       >
-        <ion-icon name="exit-outline"></ion-icon>
+        <ion-icon name="cart-outline"></ion-icon>
       </Icon>
     </Container>
   );
@@ -27,6 +39,14 @@ const Container = styled.div`
   & {
     height: 70px;
     justify-content: space-between;
+
+    background: #065183;
+
+    width: 100vw;
+
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 
   h1 {
@@ -40,9 +60,9 @@ const Container = styled.div`
 
 const Icon = styled.div`
   & {
-    justify-content: flex-end;
+    width: fit-content;
+    padding: 0px 20px;
   }
-
   ion-icon {
     font-size: 30px;
   }

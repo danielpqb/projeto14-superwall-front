@@ -6,30 +6,53 @@ export default function Footer() {
 
   return (
     <Container>
-      <div
-        onClick={(e) => {
-          navigate("/new-income");
+      <Icon
+        onClick={() => {
+          navigate("/");
         }}
       >
-        <ion-icon name="add-circle-outline"></ion-icon>
-        <h1>Nova entrada</h1>
-      </div>
-      <div
-        onClick={(e) => {
-          navigate("/new-spent");
+        <ion-icon name="home-outline"></ion-icon>
+      </Icon>
+
+      <Icon
+        onClick={() => {
+          navigate("/");
         }}
       >
-        <ion-icon name="remove-circle-outline"></ion-icon>
-        <h1>Nova saída</h1>
-      </div>
+        <ion-icon name="notifications-outline"></ion-icon>
+      </Icon>
+
+      <Icon
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <ion-icon name="receipt-outline"></ion-icon>
+      </Icon>
+
+      <Icon
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </Icon>
     </Container>
   );
 }
 
 const Container = styled.div`
   & {
-    height: 110px;
-    padding-top: 10px;
+    height: 60px;
+    padding: 10px;
+
+    background: #065183;
+
+    width: 100vw;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
   }
 
   ion-icon {
@@ -42,17 +65,10 @@ const Container = styled.div`
 
     width: 50px;
   }
+`;
 
-  div {
-    flex-direction: column;
-
-    justify-content: space-between;
-    align-items: flex-start;
-
-    padding: 10px;
-    margin: 5px;
-
-    background: #a328d6;
-    border-radius: 5px;
+const Icon = styled.div`
+  ion-icon {
+    font-size: 30px;
   }
 `;
