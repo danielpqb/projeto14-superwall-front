@@ -35,7 +35,7 @@ export default function App() {
 
 const Container = styled.div`
   & {
-    background-color: #38a6f0;
+    background-color: var(--azul-base);
 
     flex-direction: column;
   }

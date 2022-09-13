@@ -40,7 +40,7 @@ const Container = styled.div`
     height: 70px;
     justify-content: space-between;
 
-    background: #065183;
+    background: var(--azul-base);
 
     width: 100vw;
 

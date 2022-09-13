@@ -20,7 +20,7 @@ export default function SubmitButton({ children, disabled }) {
 
 const Container = styled.button`
   & {
-    background: #0076c5;
+    background: var(--azul-destaque);
     height: 50px;
     border-radius: 5px;
 

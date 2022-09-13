@@ -46,7 +46,7 @@ const Container = styled.div`
     height: 60px;
     padding: 10px;
 
-    background: #065183;
+    background: var(--azul-base);
 
     width: 100vw;
 

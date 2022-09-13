@@ -103,6 +103,6 @@ const AddToCart = styled.div`
 
   ion-icon {
     font-size: 30px;
-    color: #065183;
+    color: var(--azul-base);
   }
 `;
