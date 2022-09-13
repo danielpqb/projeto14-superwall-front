@@ -35,7 +35,7 @@ export default function Footer() {
           navigate("/");
         }}
       >
-        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-icon name="cart-outline"></ion-icon>
       </Icon>
     </Container>
   );
@@ -53,6 +53,8 @@ const Container = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
+
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   }
 
   ion-icon {

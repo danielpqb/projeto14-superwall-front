@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
-import Logo from "../Common/Logo";
+import ProductsList from "../Common/ProductsList/ProductsList";
 
 export default function Store() {
   return (
     <Container>
       <Header></Header>
-      <Logo />
+
+      <ProductsList />
+
       <Footer></Footer>
     </Container>
   );
@@ -20,15 +22,9 @@ const Container = styled.div`
 
     flex-direction: column;
 
-    padding: 20px;
-
     font-weight: 700;
     font-size: 15px;
 
-    color: #ffffff;
-  }
-
-  h1 {
-    margin: 30px 0px;
+    background-color: #f3f3f3;
   }
 `;
