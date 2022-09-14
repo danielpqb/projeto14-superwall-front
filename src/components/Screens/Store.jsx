@@ -1,13 +1,22 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import ProductsList from "../Common/ProductsList/ProductsList";
+import Sidebar from "../Common/Sidebar";
+
+import UserContext from "../../Context/UserContext";
 
 export default function Store() {
+
+  const { showSideBar } = useContext(UserContext);
+
   return (
     <Container>
       <Header></Header>
 
+      { showSideBar? <Sidebar /> : <></>}
+      
       <ProductsList />
 
       <Footer></Footer>

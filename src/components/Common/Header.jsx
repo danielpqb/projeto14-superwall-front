@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import InputBox from "./InputBox";
 
+import UserContext from "../../Context/UserContext";
+
 export default function Header() {
   const navigate = useNavigate();
+
+  const { showSideBar, setShowSideBar } = useContext(UserContext);
 
   const [search, setSearch] = useState("");
 
   return (
     <Container>
-      <Icon onClick={() => {}}>
+      <Icon onClick={() => {
+        setShowSideBar(!showSideBar);
+      }}>
         <ion-icon name="menu"></ion-icon>
       </Icon>
 
@@ -48,7 +54,7 @@ const Container = styled.div`
     top: 0;
     left: 0;
 
-    z-index: 1;
+    z-index: 2;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
