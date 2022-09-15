@@ -13,6 +13,7 @@ import Product from "./Screens/Product";
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
   const [showSideBar, setShowSideBar] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     //console.log(userData);
@@ -27,6 +28,8 @@ export default function App() {
             setUserData,
             showSideBar,
             setShowSideBar,
+            cart,
+            setCart,
           }}
         >
           <GlobalStyle />

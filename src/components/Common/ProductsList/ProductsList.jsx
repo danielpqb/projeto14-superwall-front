@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getAllProducts } from "../../../services/superwallAPI";
 import Product from "./Product";
+import UserContext from "../../../Context/UserContext";
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);

@@ -1,21 +1,59 @@
 import styled from "styled-components";
+import { useContext, useEffect } from "react";
+import UserContext from "../../../Context/UserContext";
 
 export default function Product({ productData, onClick }) {
+
   const { description, price, imgSrc } = productData;
+  const { cart, setCart } = useContext(UserContext);
+
+  useEffect(() => {
+    if (localStorage.getItem('SuperWall-cart') !== null) {
+        setCart(JSON.parse(localStorage.getItem('SuperWall-cart')));
+    }
+  }, []);
+
+  console.log(cart);
+
+  function addToCart(){
+    if(!window.confirm("Deseja adicionar este produto ao carrinho de compras?")){
+      return;
+    }
+
+    const repeatedProduct = cart.find(product => product.id === productData.id);
+    let newCart;
+
+    if(!repeatedProduct) {
+      newCart = [...cart, {...productData, qnt:1}]
+    } else {
+      repeatedProduct.qnt += 1;
+      newCart = [...cart];
+    }
+    
+    setCart(newCart);
+    localStorage.setItem('SuperWall-cart', JSON.stringify(newCart));
+  }
+
   return (
-    <Container onClick={onClick}>
-      <ImageBox>
-        <img src={imgSrc} alt="" />
-      </ImageBox>
+    <Container>
 
-      <Details>
-        <h1>{description}</h1>
-        <h2>$ {price.toFixed(2)}</h2>
-      </Details>
+      <ProductInfo onClick={onClick}>
 
-      <AddToCart>
+        <ImageBox>
+          <img src={imgSrc} alt="" />
+        </ImageBox>
+
+        <Details>
+          <h1>{description}</h1>
+          <h2>$ {price.toFixed(2)}</h2>
+        </Details>
+
+      </ProductInfo>
+
+      <AddToCart onClick={addToCart}>
         <ion-icon name="add-circle"></ion-icon>
       </AddToCart>
+
     </Container>
   );
 }
@@ -42,11 +80,18 @@ const Container = styled.div`
 
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   }
+`;
 
-  &:hover {
+const ProductInfo = styled.div`
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
     opacity: 0.6;
   }
-`;
+`
 
 const ImageBox = styled.div`
   & {
@@ -55,6 +100,8 @@ const ImageBox = styled.div`
   }
 
   img {
+    height: 100%;
+    width: 100%;
     border-radius: 12px;
     object-fit: contain;
   }
@@ -92,17 +139,31 @@ const Details = styled.div`
 `;
 
 const AddToCart = styled.div`
-  & {
-    position: absolute;
-    top: 5px;
-    right: 5px;
 
-    width: 30px;
-    height: 30px;
-  }
+  cursor: pointer;
+  z-index: 1;
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  width: 30px;
+  height: 30px;
 
   ion-icon {
     font-size: 30px;
     color: var(--azul-base);
+  }
+
+  &:hover {
+    filter: brightness(1.4);
+    width: 36px;
+    height: 36px;
+    top: 2px;
+    right: 2px;
+
+    ion-icon {
+      font-size: 36px;
+    }
   }
 `;
