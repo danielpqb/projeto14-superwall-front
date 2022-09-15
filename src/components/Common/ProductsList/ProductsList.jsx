@@ -23,7 +23,7 @@ export default function ProductsList() {
             <Product
               productData={product}
               onClick={() => {
-                navigate("/products/" + product.id, {
+                navigate("/products/" + product._id, {
                   replace: false,
                   state: product,
                 });

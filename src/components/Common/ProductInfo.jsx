@@ -2,8 +2,10 @@ import styled from "styled-components";
 import Price from "./Price";
 import dayjs from "dayjs";
 import SubmitButton from "./SubmitButton";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductInfo({ productData }) {
+  const navigate = useNavigate();
   const now = dayjs(Date.now());
   const { description, price, imgSrc } = productData;
   return (
@@ -22,13 +24,18 @@ export default function ProductInfo({ productData }) {
         <ion-icon name="rocket-outline"></ion-icon>
         Chegará grátis entre os dias {now.add(1, "day").format("DD")}/
         {now.format("MM")} e {now.add(3, "day").format("DD")}/{now.format("MM")}
-        .
       </Shipping>
 
       <Buttons>
-        <SubmitButton>Comprar agora</SubmitButton>
-        <SubmitButton>Adicionar ao carrinho</SubmitButton>
-        <SubmitButton>Voltar</SubmitButton>
+        <SubmitButton onClick={() => {}}>Comprar agora</SubmitButton>
+        <SubmitButton onClick={() => {}}>Adicionar ao carrinho</SubmitButton>
+        <SubmitButton
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Voltar
+        </SubmitButton>
       </Buttons>
     </Container>
   );
@@ -41,7 +48,7 @@ const Container = styled.div`
     justify-content: flex-start;
 
     width: calc(100% - 10px);
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh - 140px);
 
     padding: 15px;
     margin: 70px 0px;
@@ -106,10 +113,21 @@ const Inventory = styled.div`
 const Buttons = styled.div`
   & {
     flex-direction: column;
-    margin: 20px 0px;
+    margin-top: 15px;
   }
 
   button {
     margin: 5px 0px;
+    font-weight: 500;
+  }
+
+  button:nth-child(2) {
+    background-color: #a7d6f5;
+    color: var(--azul-destaque);
+  }
+
+  button:nth-child(3) {
+    background-color: #ececec;
+    color: #505050;
   }
 `;
