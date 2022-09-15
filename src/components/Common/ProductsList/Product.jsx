@@ -13,14 +13,12 @@ export default function Product({ productData, onClick }) {
     }
   }, []);
 
-  console.log(cart);
-
   function addToCart(){
     if(!window.confirm("Deseja adicionar este produto ao carrinho de compras?")){
       return;
     }
 
-    const repeatedProduct = cart.find(product => product.id === productData.id);
+    const repeatedProduct = cart.find(product => product._id === productData._id);
     let newCart;
 
     if(!repeatedProduct) {
