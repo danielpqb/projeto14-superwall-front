@@ -11,6 +11,7 @@ import Store from "./Screens/Store";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     //console.log(userData);
