@@ -3,11 +3,38 @@ import Price from "./Price";
 import dayjs from "dayjs";
 import SubmitButton from "./SubmitButton";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import UserContext from "../../Context/UserContext";
 
 export default function ProductInfo({ productData }) {
+  const { cart, setCart } = useContext(UserContext);
   const navigate = useNavigate();
   const now = dayjs(Date.now());
   const { description, price, imgSrc } = productData;
+
+  useEffect(() => {
+    if (localStorage.getItem("SuperWall-cart") !== null) {
+      setCart(JSON.parse(localStorage.getItem("SuperWall-cart")));
+    }
+  }, [setCart]);
+
+  function addToCart() {
+    const repeatedProduct = cart.find(
+      (product) => product._id === productData._id
+    );
+
+    let newCart;
+    if (!repeatedProduct) {
+      newCart = [...cart, { ...productData, qnt: 1 }];
+    } else {
+      repeatedProduct.qnt += 1;
+      newCart = [...cart];
+    }
+
+    setCart(newCart);
+    localStorage.setItem("SuperWall-cart", JSON.stringify(newCart));
+  }
+
   return (
     <Container>
       <Description>{description}</Description>
@@ -28,7 +55,13 @@ export default function ProductInfo({ productData }) {
 
       <Buttons>
         <SubmitButton onClick={() => {}}>Comprar agora</SubmitButton>
-        <SubmitButton onClick={() => {}}>Adicionar ao carrinho</SubmitButton>
+        <SubmitButton
+          onClick={() => {
+            addToCart();
+          }}
+        >
+          Adicionar ao carrinho
+        </SubmitButton>
         <SubmitButton
           onClick={() => {
             navigate(-1);

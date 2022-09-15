@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 export default function Price({ price }) {
+  const integer = Math.trunc(price);
+  const decimal = Math.trunc((price % 1) * 100);
+
   return (
     <Container>
       <Currency>R$</Currency>
-      <Integer>{Math.trunc(price)}</Integer>
-      <Decimal>{Math.trunc((price % 1) * 100)}</Decimal>
+      <Integer>{price && integer}</Integer>
+      <Decimal>{price && decimal}</Decimal>
     </Container>
   );
 }
