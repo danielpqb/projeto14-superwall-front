@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import { postSignUp } from "../../services/superwallAPI";
 import InputBox from "../Common/InputBox";
 import Logo from "../Common/Logo";
 import SubmitButton from "../Common/SubmitButton";
@@ -24,9 +25,9 @@ export default function Register() {
       return;
     }
 
-    await axios.post("http://localhost:5000/register", form);
+    await postSignUp(form);
 
-    navigate("/");
+    navigate("/account/login");
   }
 
   return (
@@ -72,7 +73,7 @@ export default function Register() {
         <SubmitButton>Cadastrar</SubmitButton>
       </RegisterForm>
 
-      <Link to={"/"}>Já tem uma conta? Entre agora!</Link>
+      <Link to={"/account/login"}>Já tem uma conta? Entre agora!</Link>
     </Container>
   );
 }

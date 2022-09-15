@@ -1,11 +1,12 @@
-import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import UserContext from "../../Context/UserContext";
 import InputBox from "../Common/InputBox";
 import Logo from "../Common/Logo";
 import SubmitButton from "../Common/SubmitButton";
+import { postSignIn } from "../../services/superwallAPI";
 
 export default function Login() {
   const { userData, setUserData } = useContext(UserContext);
@@ -24,19 +25,17 @@ export default function Login() {
 
     setIsSubmitDisabled(true);
 
-    axios
-      .post("http://localhost:5000/login", form)
+    postSignIn(form)
       .then((res) => {
-        const { token, email, name, transactions } = res.data;
+        const { token, email, name } = res.data;
 
         setUserData({
           ...userData,
           token: token,
           email: email,
           name: name,
-          transactions: transactions,
         });
-        navigate("/balance");
+        navigate("/");
       })
       .catch((res) => {
         setIsSubmitDisabled(false);
@@ -70,7 +69,7 @@ export default function Login() {
         <SubmitButton disabled={isSubmitDisabled}>Entrar</SubmitButton>
       </RegisterForm>
 
-      <Link to={"/register"}>Primeira vez? Cadastre-se!</Link>
+      <Link to={"/account/register"}>Primeira vez? Cadastre-se!</Link>
     </Container>
   );
 }
