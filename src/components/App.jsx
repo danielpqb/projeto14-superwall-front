@@ -11,6 +11,7 @@ import Store from "./Screens/Store";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
+  const [showSideBar, setShowSideBar] = useState(false)
 
   useEffect(() => {
     //console.log(userData);
@@ -19,7 +20,10 @@ export default function App() {
   return (
     <Container>
       <BrowserRouter>
-        <UserContext.Provider value={{ userData, setUserData }}>
+        <UserContext.Provider value={{
+          userData, setUserData,
+          showSideBar, setShowSideBar,
+        }}>
           <GlobalStyle />
           <Routes>
             <Route path="/" element={<Store />}></Route>
