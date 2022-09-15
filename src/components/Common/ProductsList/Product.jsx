@@ -12,8 +12,6 @@ export default function Product({ productData, onClick }) {
     }
   }, [setCart]);
 
-  console.log(cart);
-
   function addToCart() {
     if (
       !window.confirm("Deseja adicionar este produto ao carrinho de compras?")

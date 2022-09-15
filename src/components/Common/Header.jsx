@@ -34,7 +34,7 @@ export default function Header() {
 
       <Icon
         onClick={() => {
-          navigate("/cart");
+          navigate("/");
         }}
       >
         <ion-icon name="person-circle"></ion-icon>
@@ -74,8 +74,12 @@ const Icon = styled.div`
   & {
     width: fit-content;
     padding: 0px 20px;
+    cursor: pointer;
   }
   ion-icon {
     font-size: 30px;
+  }
+  &:hover{
+    filter: brightness(0.6)
   }
 `;

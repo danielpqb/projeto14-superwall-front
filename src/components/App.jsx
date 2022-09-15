@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import Store from "./Screens/Store";
 import Product from "./Screens/Product";
 
+import Cart from "./Screens/Cart";
+
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
   const [showSideBar, setShowSideBar] = useState(false);
@@ -38,6 +40,7 @@ export default function App() {
             <Route path="/account/login" element={<Login />}></Route>
             <Route path="/account/register" element={<Register />}></Route>
             <Route path="/products/:id" element={<Product />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </UserContext.Provider>

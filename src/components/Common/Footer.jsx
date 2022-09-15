@@ -32,7 +32,7 @@ export default function Footer() {
 
       <Icon
         onClick={() => {
-          navigate("/");
+          navigate("/cart");
         }}
       >
         <ion-icon name="cart"></ion-icon>
@@ -72,7 +72,11 @@ const Container = styled.div`
 `;
 
 const Icon = styled.div`
+  cursor: pointer;
   ion-icon {
     font-size: 30px;
+  }
+  &:hover{
+    filter: brightness(0.6)
   }
 `;
