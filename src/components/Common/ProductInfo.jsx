@@ -1,33 +1,57 @@
 import styled from "styled-components";
+import Price from "./Price";
+import dayjs from "dayjs";
+import SubmitButton from "./SubmitButton";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductInfo({ productData }) {
+  const navigate = useNavigate();
+  const now = dayjs(Date.now());
   const { description, price, imgSrc } = productData;
   return (
     <Container>
+      <Description>{description}</Description>
+
       <ImageBox>
         <img src={imgSrc} alt="" />
       </ImageBox>
 
-      <Details>
-        <h1>{description}</h1>
-        <h2>$ {parseFloat(price).toFixed(2)}</h2>
-      </Details>
+      <Price price={price} />
+
+      <Inventory>Estoque disponível</Inventory>
+
+      <Shipping>
+        <ion-icon name="rocket-outline"></ion-icon>
+        Chegará grátis entre os dias {now.add(1, "day").format("DD")}/
+        {now.format("MM")} e {now.add(3, "day").format("DD")}/{now.format("MM")}
+      </Shipping>
+
+      <Buttons>
+        <SubmitButton onClick={() => {}}>Comprar agora</SubmitButton>
+        <SubmitButton onClick={() => {}}>Adicionar ao carrinho</SubmitButton>
+        <SubmitButton
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Voltar
+        </SubmitButton>
+      </Buttons>
     </Container>
   );
 }
 
 const Container = styled.div`
   & {
-    position: relative;
     flex-direction: column;
 
-    width: calc(50% - 10px);
-    max-width: 150px;
-    height: 200px;
+    justify-content: flex-start;
 
-    padding: 10px;
-    padding-top: 0px;
-    margin: 5px;
+    width: calc(100% - 10px);
+    min-height: calc(100vh - 140px);
+
+    padding: 15px;
+    margin: 70px 0px;
 
     font-weight: 700;
     font-size: 15px;
@@ -38,16 +62,11 @@ const Container = styled.div`
 
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   }
-
-  &:hover {
-    opacity: 0.6;
-  }
 `;
 
 const ImageBox = styled.div`
   & {
-    height: 150px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    height: 300px;
   }
 
   img {
@@ -56,49 +75,59 @@ const ImageBox = styled.div`
   }
 `;
 
-const Details = styled.div`
+const Description = styled.div`
   & {
-    flex-direction: column;
-    height: 40px;
-
-    padding-top: 5px;
-
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-
-  h1,
-  h2 {
-    width: 100%;
+    justify-content: flex-start;
     color: black;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  h1 {
-    font-size: 12px;
-  }
-
-  h2 {
-    font-family: "Roboto";
-    font-weight: bold;
-    font-size: 16px;
   }
 `;
 
-const AddToCart = styled.div`
+const Shipping = styled.div`
   & {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+    justify-content: flex-start;
 
-    width: 30px;
-    height: 30px;
+    margin: 5px 0px;
+
+    color: #00a650;
   }
 
   ion-icon {
-    font-size: 30px;
-    color: var(--azul-base);
+    color: #00a650;
+    font-size: 22px;
+
+    margin-right: 5px;
+  }
+`;
+
+const Inventory = styled.div`
+  & {
+    justify-content: flex-start;
+    color: black;
+
+    margin: 5px 0px;
+
+    font-weight: 400;
+  }
+`;
+
+const Buttons = styled.div`
+  & {
+    flex-direction: column;
+    margin-top: 15px;
+  }
+
+  button {
+    margin: 5px 0px;
+    font-weight: 500;
+  }
+
+  button:nth-child(2) {
+    background-color: #a7d6f5;
+    color: var(--azul-destaque);
+  }
+
+  button:nth-child(3) {
+    background-color: #ececec;
+    color: #505050;
   }
 `;

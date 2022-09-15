@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getAllProducts } from "../../../services/superwallAPI";
 import Product from "./Product";
-import UserContext from "../../../Context/UserContext";
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -14,7 +13,7 @@ export default function ProductsList() {
     getAllProducts().then((res) => {
       setProducts(res.data);
     });
-  }, []);
+  }, [setProducts]);
 
   return (
     <Container>
@@ -24,7 +23,7 @@ export default function ProductsList() {
             <Product
               productData={product}
               onClick={() => {
-                navigate("/products/" + product.id, {
+                navigate("/products/" + product._id, {
                   replace: false,
                   state: product,
                 });

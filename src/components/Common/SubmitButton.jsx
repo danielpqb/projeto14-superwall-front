@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 
-export default function SubmitButton({ children, disabled }) {
+export default function SubmitButton({ children, disabled, onClick }) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       {disabled ? (
         <ThreeDots
           height="13"
@@ -26,8 +26,6 @@ const Container = styled.button`
 
     font-weight: 700;
     font-size: 20px;
-
-    color: #ffffff;
   }
 
   &:hover {
