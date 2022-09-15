@@ -66,25 +66,20 @@ const tempList = [
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);
-  const { cart, setCart } = useContext(UserContext);
 
   useEffect(() => {
-    getProducts().then((res) => {
+    /* getProducts().then((res) => {
       setProducts(res.data);
-    });
+    }); */
+    setProducts(tempList); // >>>> TEMPORÁRIO <<<<
   }, []);
-
-  function addToCart(product){
-
-    console.log(product);
-  }
 
   return (
     <Container>
       {products.map((product, index) => {
         return (
           <React.Fragment key={index}>
-            <Product productData={product} onClick={() => addToCart(product)} />
+            <Product productData={product} onClick={() => {}} />
           </React.Fragment>
         );
       })}

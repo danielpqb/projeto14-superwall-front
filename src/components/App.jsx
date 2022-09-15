@@ -24,6 +24,7 @@ export default function App() {
         <UserContext.Provider value={{
           userData, setUserData,
           showSideBar, setShowSideBar,
+          cart, setCart,
         }}>
           <GlobalStyle />
           <Routes>
