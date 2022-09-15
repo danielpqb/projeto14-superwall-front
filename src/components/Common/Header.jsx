@@ -14,9 +14,11 @@ export default function Header() {
 
   return (
     <Container>
-      <Icon onClick={() => {
-        setShowSideBar(!showSideBar);
-      }}>
+      <Icon
+        onClick={() => {
+          setShowSideBar(!showSideBar);
+        }}
+      >
         <ion-icon name="menu"></ion-icon>
       </Icon>
 
@@ -43,7 +45,7 @@ export default function Header() {
 
 const Container = styled.div`
   & {
-    height: 70px;
+    height: 60px;
     justify-content: space-between;
 
     background: var(--azul-base);

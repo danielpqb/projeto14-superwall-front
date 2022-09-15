@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     vertical-align: middle;
     box-sizing: border-box;
 
-    font-family: "Raleway";
+    font-family: "Fira Sans";
     font-style: normal;
     font-weight: 400;
     font-size: var(--fontsize);
