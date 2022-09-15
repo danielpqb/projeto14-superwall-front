@@ -18,15 +18,15 @@ export default function Sidebar() {
     {iconName: 'cart', legend: 'Carrinho de compras', route:'/' },
   ];
 
-  const sessions = ["Alimentos",
-    "Bebidas",
-    "Higiene",
-    "Produtos de Limpeza",
-    "Farmácia"
+  const sessions = [
+    {title:"Alimentos", route:"/"},
+    {title:"Bebidas", route:"/"},
+    {title:"Higiene", route:"/"},
+    {title:"Produtos de Limpeza", route:"/"},
+    {title:"Farmácia", route:"/"},
   ]
 
   function Item({item}) {
-    console.log(item)
     return (
       <StyledItem onClick={() => {
         alert(item.legend);
@@ -39,6 +39,18 @@ export default function Sidebar() {
 
         <h2>{item.legend}</h2>
       </StyledItem>
+    )
+  }
+
+  function Session({session}) {
+    return (
+      <StyledSession onClick={() => {
+        alert(session.title);
+        setShowSideBar(false);
+        navigate(session.route);
+      }}>
+        <h2>{session.title}</h2>
+      </StyledSession>
     )
   }
 
@@ -57,7 +69,7 @@ export default function Sidebar() {
         </SessionHeader>
 
         <Sessions>
-          {sessions}
+          {sessions.map((session, index) => <Session key={index} session={session} />)}
         </Sessions>
         
         
@@ -145,14 +157,15 @@ const StyledItem = styled.div`
     }
   }
 `
+
 const SessionHeader = styled.div`
-  height: 30px;
-  width: 95%;
+  height: 80px;
+  width: calc(100% - 40px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: var(--azul-base) 2px solid;
-  margin: 0 20px;
+  margin: 20px;
 
   img {
     width: 35px;
@@ -169,7 +182,24 @@ const Sessions = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding:20px;
+  padding: 0 20px;
+`
 
-  color: var(--azul-base);
+const StyledSession = styled.div`
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+
+  h2{
+    color: var(--azul-base);
+  }
+
+  &:hover {
+    filter:brightness(1.40);
+    h2 {
+      font-weight: 600;
+    }
+  }
 `
