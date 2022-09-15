@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Price from "./Price";
 import dayjs from "dayjs";
+import SubmitButton from "./SubmitButton";
 
 export default function ProductInfo({ productData }) {
   const now = dayjs(Date.now());
@@ -15,11 +16,20 @@ export default function ProductInfo({ productData }) {
 
       <Price price={price} />
 
+      <Inventory>Estoque disponível</Inventory>
+
       <Shipping>
         <ion-icon name="rocket-outline"></ion-icon>
-        Chegará grátis entre {now.day()}/{now.month()} e{" "}
-        {now.add(1, "day").day()}/{now.month()}
+        Chegará grátis entre os dias {now.add(1, "day").format("DD")}/
+        {now.format("MM")} e {now.add(3, "day").format("DD")}/{now.format("MM")}
+        .
       </Shipping>
+
+      <Buttons>
+        <SubmitButton>Comprar agora</SubmitButton>
+        <SubmitButton>Adicionar ao carrinho</SubmitButton>
+        <SubmitButton>Voltar</SubmitButton>
+      </Buttons>
     </Container>
   );
 }
@@ -34,7 +44,7 @@ const Container = styled.div`
     min-height: calc(100vh - 130px);
 
     padding: 15px;
-    margin: 5px;
+    margin: 70px 0px;
 
     font-weight: 700;
     font-size: 15px;
@@ -60,6 +70,7 @@ const ImageBox = styled.div`
 
 const Description = styled.div`
   & {
+    justify-content: flex-start;
     color: black;
   }
 `;
@@ -78,5 +89,27 @@ const Shipping = styled.div`
     font-size: 22px;
 
     margin-right: 5px;
+  }
+`;
+
+const Inventory = styled.div`
+  & {
+    justify-content: flex-start;
+    color: black;
+
+    margin: 5px 0px;
+
+    font-weight: 400;
+  }
+`;
+
+const Buttons = styled.div`
+  & {
+    flex-direction: column;
+    margin: 20px 0px;
+  }
+
+  button {
+    margin: 5px 0px;
   }
 `;

@@ -3,42 +3,43 @@ import { useContext, useEffect } from "react";
 import UserContext from "../../../Context/UserContext";
 
 export default function Product({ productData, onClick }) {
-
   const { description, price, imgSrc } = productData;
   const { cart, setCart } = useContext(UserContext);
 
   useEffect(() => {
-    if (localStorage.getItem('SuperWall-cart') !== null) {
-        setCart(JSON.parse(localStorage.getItem('SuperWall-cart')));
+    if (localStorage.getItem("SuperWall-cart") !== null) {
+      setCart(JSON.parse(localStorage.getItem("SuperWall-cart")));
     }
-  }, []);
+  }, [setCart]);
 
   console.log(cart);
 
-  function addToCart(){
-    if(!window.confirm("Deseja adicionar este produto ao carrinho de compras?")){
+  function addToCart() {
+    if (
+      !window.confirm("Deseja adicionar este produto ao carrinho de compras?")
+    ) {
       return;
     }
 
-    const repeatedProduct = cart.find(product => product.id === productData.id);
+    const repeatedProduct = cart.find(
+      (product) => product.id === productData.id
+    );
     let newCart;
 
-    if(!repeatedProduct) {
-      newCart = [...cart, {...productData, qnt:1}]
+    if (!repeatedProduct) {
+      newCart = [...cart, { ...productData, qnt: 1 }];
     } else {
       repeatedProduct.qnt += 1;
       newCart = [...cart];
     }
-    
+
     setCart(newCart);
-    localStorage.setItem('SuperWall-cart', JSON.stringify(newCart));
+    localStorage.setItem("SuperWall-cart", JSON.stringify(newCart));
   }
 
   return (
     <Container>
-
       <ProductInfo onClick={onClick}>
-
         <ImageBox>
           <img src={imgSrc} alt="" />
         </ImageBox>
@@ -47,13 +48,11 @@ export default function Product({ productData, onClick }) {
           <h1>{description}</h1>
           <h2>$ {price.toFixed(2)}</h2>
         </Details>
-
       </ProductInfo>
 
       <AddToCart onClick={addToCart}>
         <ion-icon name="add-circle"></ion-icon>
       </AddToCart>
-
     </Container>
   );
 }
@@ -83,15 +82,15 @@ const Container = styled.div`
 `;
 
 const ProductInfo = styled.div`
-    cursor: pointer;
+  cursor: pointer;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    &:hover {
+  &:hover {
     opacity: 0.6;
   }
-`
+`;
 
 const ImageBox = styled.div`
   & {
@@ -139,7 +138,6 @@ const Details = styled.div`
 `;
 
 const AddToCart = styled.div`
-
   cursor: pointer;
   z-index: 1;
 
