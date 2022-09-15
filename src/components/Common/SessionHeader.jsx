@@ -11,7 +11,6 @@ export default function SessionHeader({title}) {
 }
 
 const Container = styled.div`
-  height: 40px;
   width: calc(100% - 40px);
   display: flex;
   align-items: center;
@@ -29,5 +28,6 @@ const Container = styled.div`
     color: var(--azul-base);
     font-weight:900;
     font-size: 24px;
+    text-align: end;
   }
 `
