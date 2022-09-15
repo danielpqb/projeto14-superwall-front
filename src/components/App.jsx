@@ -8,10 +8,11 @@ import Register from "./Screens/Register";
 
 import { useEffect, useState } from "react";
 import Store from "./Screens/Store";
+import Product from "./Screens/Product";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
-  const [showSideBar, setShowSideBar] = useState(false)
+  const [showSideBar, setShowSideBar] = useState(false);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -21,16 +22,22 @@ export default function App() {
   return (
     <Container>
       <BrowserRouter>
-        <UserContext.Provider value={{
-          userData, setUserData,
-          showSideBar, setShowSideBar,
-          cart, setCart,
-        }}>
+        <UserContext.Provider
+          value={{
+            userData,
+            setUserData,
+            showSideBar,
+            setShowSideBar,
+            cart,
+            setCart,
+          }}
+        >
           <GlobalStyle />
           <Routes>
             <Route path="/" element={<Store />}></Route>
             <Route path="/account/login" element={<Login />}></Route>
             <Route path="/account/register" element={<Register />}></Route>
+            <Route path="/products/:id" element={<Product />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </UserContext.Provider>
