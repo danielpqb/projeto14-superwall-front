@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getProducts } from "../../../services/superwallAPI";
+import { getAllProducts } from "../../../services/superwallAPI";
 import Product from "./Product";
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getProducts().then((res) => {
+    getAllProducts().then((res) => {
       setProducts(res.data);
     });
   }, []);
@@ -17,7 +20,15 @@ export default function ProductsList() {
       {products.map((product, index) => {
         return (
           <React.Fragment key={index}>
-            <Product productData={product} onClick={() => {}} />
+            <Product
+              productData={product}
+              onClick={() => {
+                navigate("/products/" + product.id, {
+                  replace: false,
+                  state: product,
+                });
+              }}
+            />
           </React.Fragment>
         );
       })}

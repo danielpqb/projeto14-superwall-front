@@ -10,8 +10,12 @@ function postSignIn(user) {
   return axios.post(`${BASE_URL}/account/login`, user);
 }
 
-function getProducts() {
+function getAllProducts() {
   return axios.get(`${BASE_URL}/products`);
 }
 
-export { postSignUp, postSignIn, getProducts };
+function getOneProduct(id) {
+  return axios.get(`${BASE_URL}/products/${id}`);
+}
+
+export { postSignUp, postSignIn, getAllProducts, getOneProduct };
