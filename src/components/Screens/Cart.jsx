@@ -27,6 +27,7 @@ export default function Cart() {
       sum += cart[i].price * cart[i].qnt;
     }
     setTotal(sum);
+    localStorage.setItem("SuperWall-cart", JSON.stringify(cart));
   }, [cart]);
 
   function cleanCart() {
