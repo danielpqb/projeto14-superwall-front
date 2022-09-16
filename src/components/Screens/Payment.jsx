@@ -118,13 +118,13 @@ const Cancel = styled.button`
   height: 20px;
   border-radius: 5px;
 
-  font-weight: 300;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
   color: var(--azul-base);
   margin-top: 10px;
 
   &:hover {
     filter: brightness(0.6);
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
