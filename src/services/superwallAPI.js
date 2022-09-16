@@ -18,4 +18,16 @@ function getOneProduct(id) {
   return axios.get(`${BASE_URL}/products/${id}`);
 }
 
-export { postSignUp, postSignIn, getAllProducts, getOneProduct };
+function postOneOrder(order, header) {
+  return axios.post(`${BASE_URL}/orders`, order, header);
+}
+
+function getUserOrders(header) {
+  return axios.post(`${BASE_URL}/orders`, header);
+}
+
+function deleteOrderId(id, header) {
+  return axios.post(`${BASE_URL}/orders/${id}`, header);
+}
+
+export { postSignUp, postSignIn, getAllProducts, getOneProduct, postOneOrder, getUserOrders, deleteOrderId };

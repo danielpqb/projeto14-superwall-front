@@ -4,13 +4,15 @@ import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import Sidebar from "../Common/Sidebar";
 import SessionHeader from "../Common/SessionHeader";
+import Icon from "../Common/Icon";
 
 import UserContext from "../../Context/UserContext";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { showSideBar, cart, setCart } = useContext(UserContext);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("SuperWall-cart") !== null) {
@@ -25,6 +27,7 @@ export default function Cart() {
       sum += cart[i].price * cart[i].qnt;
     }
     setTotal(sum);
+    localStorage.setItem("SuperWall-cart", JSON.stringify(cart));
   }, [cart]);
 
   function cleanCart() {
@@ -38,10 +41,49 @@ export default function Cart() {
     }
   }
 
+  function changeQntProduct(item, operation){
+    
+    if (operation === "+"){
+      item.qnt += 1;
+    } else {
+      item.qnt -= 1;
+    }
+
+    if (item.qnt === 0){
+      const newCart = cart.filter(product => product._id !== item._id);
+      return setCart(newCart);
+    }
+    
+    setCart([...cart]);
+  }
+
   function Product({ item }) {
     return (
       <StyledProduct>
-        <h6>Produto: {item.description}</h6>
+        <ImageBox>
+          <img src={item.imgSrc} alt="" />
+        </ImageBox>
+
+        <ProductInfo>
+          <h1>Produto: {item.description}</h1>
+          <h2>R$ {item.price.toFixed(2)}</h2>
+          <h3>
+            Quantidade:
+            <div onClick={() => changeQntProduct(item, '-') }>
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </div>
+            <b>{item.qnt}</b>
+            <div onClick={() => changeQntProduct(item, '+') }>
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </div>
+          </h3>
+        </ProductInfo>
+
+        <ProductTotal>
+          <h2>R$</h2>
+          <h1>{(item.price * item.qnt).toFixed(2)}</h1>
+        </ProductTotal>
+        
       </StyledProduct>
     );
   }
@@ -64,7 +106,7 @@ export default function Cart() {
           <h2>R$ {total.toFixed(2)}</h2>
         </div>
         <div>
-          <Continue onClick={() => Navigate("/cart")}>Continuar</Continue>
+          <Continue onClick={() => { navigate("/payment") }}>Continuar</Continue>
           <Cancel onClick={cleanCart}>Limpar carrinho de compras</Cancel>
         </div>
       </ToPayment>
@@ -88,10 +130,6 @@ const Container = styled.div`
 
   padding: 70px 0 180px 0;
   background-color: #f3f3f3;
-
-  h1 {
-    color: black;
-  }
 `;
 
 const StyledProduct = styled.div`
@@ -107,11 +145,96 @@ const StyledProduct = styled.div`
 
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 
-  h6 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ImageBox = styled.div`
+  width: 100px;
+
+  img {
+    height: 60px;
+    width: 60px;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+`;
+
+const ProductInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 5px 10px;
+
+
+    h1 {
+    font-weight: 300;
+    font-size: 12px;
+    color: var(--azul-base);
+    overflow-y: hidden;
+    }
+
+    h2 {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--azul-base);
+    }
+
+    h3 {
+    font-weight: 300;
+    font-size: 12px;
+    color: var(--azul-base);
+    display: flex;
+    align-items: center;
+
+    b {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--azul-base);
+    }
+
+    ion-icon {
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--azul-base);
+      border-radius: 50%;
+
+      &:hover{
+        background-color: var(--azul-base);
+        color: white;
+      }
+
+      &:active{
+        transform:translateY(2px);
+      }
+    }
+    }
+`
+
+const ProductTotal = styled.div`
+  width: 100px;
+  height: 60px;
+  padding-left: 10px;
+  border-left: var(--azul-base) 1px solid;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  h1 {
+    font-weight: 700;
     font-size: 16px;
     color: var(--azul-base);
   }
-`;
+  
+  h2 {
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--azul-base);
+  }
+`
+
 
 const ToPayment = styled.div`
   width: 100vw;
@@ -169,13 +292,13 @@ const Cancel = styled.button`
   height: 20px;
   border-radius: 5px;
 
-  font-weight: 300;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
   color: var(--azul-base);
   margin-top: 10px;
 
   &:hover {
     filter: brightness(0.6);
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
