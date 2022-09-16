@@ -57,6 +57,10 @@ export default function ProductInfo({ productData }) {
         <SubmitButton onClick={() => {}}>Comprar agora</SubmitButton>
         <SubmitButton
           onClick={() => {
+            if (!productData._id) {
+              return;
+            }
+
             addToCart();
             setAlert({
               show: true,

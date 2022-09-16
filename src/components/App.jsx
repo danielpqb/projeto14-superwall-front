@@ -13,6 +13,7 @@ import Product from "./Screens/Product";
 import Cart from "./Screens/Cart";
 import Alert from "./Common/Alert";
 import Orders from "./Screens/Orders";
+import Notifications from "./Screens/Notifications";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
@@ -48,6 +49,7 @@ export default function App() {
             <Route path="/products/:id" element={<Product />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/orders" element={<Orders />}></Route>
+            <Route path="/notifications" element={<Notifications />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </UserContext.Provider>

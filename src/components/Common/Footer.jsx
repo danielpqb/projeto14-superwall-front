@@ -15,7 +15,7 @@ export default function Footer() {
       />
       <Icon
         onClick={() => {
-          navigate("/");
+          navigate("/notifications");
         }}
         name={"notifications"}
         size={25}
