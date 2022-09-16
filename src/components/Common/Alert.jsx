@@ -44,7 +44,8 @@ const Container = styled.div`
     width: 90vw;
     height: 200px;
 
-    background: rgba(250, 250, 250, 0.98);
+    background: rgba(220, 220, 220, 1);
+    border: 3px solid rgba(0, 0, 0, 0.8);
   }
 `;
 
