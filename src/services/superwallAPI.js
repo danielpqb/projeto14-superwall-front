@@ -34,6 +34,14 @@ function getUserByToken(token) {
   });
 }
 
+function postOneOrder(order, header) {
+  return axios.post(`${BASE_URL}/orders`, order, header);
+}
+
+function deleteOrderId(id, header) {
+  return axios.post(`${BASE_URL}/orders/${id}`, header);
+}
+
 export {
   postSignUp,
   postSignIn,
@@ -41,4 +49,6 @@ export {
   getOneProduct,
   getAllOrders,
   getUserByToken,
+  postOneOrder,
+  deleteOrderId,
 };

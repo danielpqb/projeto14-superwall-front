@@ -16,6 +16,9 @@ import Orders from "./Screens/Orders";
 import Notifications from "./Screens/Notifications";
 import { getUserByToken } from "../services/superwallAPI";
 
+import Payment from "./Screens/Payment";
+import Confirmation from "./Screens/Confirmation";
+
 export default function App() {
   const [userData, setUserData] = useState({});
   const [showSideBar, setShowSideBar] = useState(false);
@@ -57,6 +60,8 @@ export default function App() {
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/orders" element={<Orders />}></Route>
             <Route path="/notifications" element={<Notifications />}></Route>
+            <Route path="/payment" element={<Payment />}></Route>
+            <Route path="/confirmation" element={<Confirmation />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </UserContext.Provider>
