@@ -185,6 +185,8 @@ const ProductInfo = styled.div`
     font-weight: 300;
     font-size: 12px;
     color: var(--azul-base);
+    display: flex;
+    align-items: center;
 
     b {
       font-weight: 600;
@@ -197,9 +199,11 @@ const ProductInfo = styled.div`
       cursor: pointer;
       font-size: 18px;
       color: var(--azul-base);
+      border-radius: 50%;
 
       &:hover{
-        filter:brightness(1.4);
+        background-color: var(--azul-base);
+        color: white;
       }
 
       &:active{
