@@ -18,9 +18,8 @@ export default function Header() {
         onClick={() => {
           setShowSideBar(!showSideBar);
         }}
-      >
-        <ion-icon name="menu"></ion-icon>
-      </Icon>
+        name={"menu"}
+      />
 
       <InputBox
         name={"search"}
@@ -36,9 +35,8 @@ export default function Header() {
         onClick={() => {
           navigate("/");
         }}
-      >
-        <ion-icon name="person-circle"></ion-icon>
-      </Icon>
+        name={"person-circle"}
+      />
     </Container>
   );
 }
@@ -79,7 +77,7 @@ const Icon = styled.div`
   ion-icon {
     font-size: 30px;
   }
-  &:hover{
-    filter: brightness(0.6)
+  &:hover {
+    filter: brightness(0.6);
   }
 `;

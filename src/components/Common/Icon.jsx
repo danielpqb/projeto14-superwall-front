@@ -2,10 +2,8 @@ import styled from "styled-components";
 
 export default function Icon({ onClick, name, size }) {
   return (
-    <Container>
-      <Icon onClick={onClick}>
-        <ion-icon name={name}></ion-icon>
-      </Icon>
+    <Container onClick={onClick} size={size}>
+      <ion-icon name={name}></ion-icon>
     </Container>
   );
 }
