@@ -6,11 +6,12 @@ import Sidebar from "../Common/Sidebar";
 import SessionHeader from "../Common/SessionHeader";
 
 import UserContext from "../../Context/UserContext";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { showSideBar, cart, setCart } = useContext(UserContext);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("SuperWall-cart") !== null) {
@@ -64,7 +65,7 @@ export default function Cart() {
           <h2>R$ {total.toFixed(2)}</h2>
         </div>
         <div>
-          <Continue onClick={() => Navigate("/cart")}>Continuar</Continue>
+          <Continue onClick={() => { navigate("/payment") }}>Continuar</Continue>
           <Cancel onClick={cleanCart}>Limpar carrinho de compras</Cancel>
         </div>
       </ToPayment>

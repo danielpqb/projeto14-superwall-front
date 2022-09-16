@@ -13,6 +13,9 @@ import Product from "./Screens/Product";
 import Cart from "./Screens/Cart";
 import Alert from "./Common/Alert";
 
+import Payment from "./Screens/Payment";
+import Confirmation from "./Screens/Confirmation";
+
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
   const [showSideBar, setShowSideBar] = useState(false);
@@ -46,6 +49,8 @@ export default function App() {
             <Route path="/account/register" element={<Register />}></Route>
             <Route path="/products/:id" element={<Product />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/payment" element={<Payment />}></Route>
+            <Route path="/confirmation" element={<Confirmation />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </UserContext.Provider>
