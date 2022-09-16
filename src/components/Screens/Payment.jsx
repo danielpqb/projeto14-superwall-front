@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import Sidebar from "../Common/Sidebar";
@@ -9,36 +9,38 @@ import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Payment() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const { showSideBar, cart, setCart } = useContext(UserContext);
+  const { showSideBar, setCart } = useContext(UserContext);
 
-    useEffect(() => {
-        if (localStorage.getItem("SuperWall-cart") !== null) {
-            setCart(JSON.parse(localStorage.getItem("SuperWall-cart")));
-        }
-    }, [setCart]);
+  useEffect(() => {
+    if (localStorage.getItem("SuperWall-cart") !== null) {
+      setCart(JSON.parse(localStorage.getItem("SuperWall-cart")));
+    }
+  }, [setCart]);
 
-    return (
-        <Container>
-            <Header></Header>
+  return (
+    <Container>
+      <Header></Header>
 
-            <SessionHeader title={"DADOS DE PAGAMENTO"} />
+      <SessionHeader title={"DADOS DE PAGAMENTO"} />
 
-            {showSideBar ? <Sidebar /> : <></>}
+      {showSideBar ? <Sidebar /> : <></>}
 
-            <h1>Dados de compra</h1>
+      <h1>Dados de compra</h1>
 
-            <ToPayment>
-                <div>
-                    <Continue onClick={() => navigate("/confirmation")}>Concluir Compra</Continue>
-                    <Cancel onClick={() => navigate("/cart")}>Voltar</Cancel>
-                </div>
-            </ToPayment>
+      <ToPayment>
+        <div>
+          <Continue onClick={() => navigate("/confirmation")}>
+            Concluir Compra
+          </Continue>
+          <Cancel onClick={() => navigate("/cart")}>Voltar</Cancel>
+        </div>
+      </ToPayment>
 
-            <Footer></Footer>
-        </Container>
-    );
+      <Footer></Footer>
+    </Container>
+  );
 }
 
 const Container = styled.div`

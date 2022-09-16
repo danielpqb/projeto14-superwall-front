@@ -1,34 +1,30 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import Sidebar from "../Common/Sidebar";
-import SessionHeader from "../Common/SessionHeader";
 
 import UserContext from "../../Context/UserContext";
-import { useNavigate } from "react-router-dom";
 
 export default function Confirmation() {
-    const navigate = useNavigate();
+  const { showSideBar, setCart } = useContext(UserContext);
 
-    const { showSideBar, setCart } = useContext(UserContext);
+  useEffect(() => {
+    localStorage.removeItem("SuperWall-cart");
+    setCart([]);
+  }, [setCart]);
 
-    useEffect(() => {
-        localStorage.removeItem("SuperWall-cart");
-        setCart([]);
-    }, [setCart]);
+  return (
+    <Container>
+      <Header></Header>
 
-    return (
-        <Container>
-            <Header></Header>
+      {showSideBar ? <Sidebar /> : <></>}
 
-            {showSideBar ? <Sidebar /> : <></>}
+      <h1>Confirmação de Compra</h1>
 
-            <h1>Confirmação de Compra</h1>
-
-            <Footer></Footer>
-        </Container>
-    );
+      <Footer></Footer>
+    </Container>
+  );
 }
 
 const Container = styled.div`

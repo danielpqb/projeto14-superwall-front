@@ -4,7 +4,6 @@ import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import Sidebar from "../Common/Sidebar";
 import SessionHeader from "../Common/SessionHeader";
-import Icon from "../Common/Icon";
 
 import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +17,7 @@ export default function Cart() {
     if (localStorage.getItem("SuperWall-cart") !== null) {
       setCart(JSON.parse(localStorage.getItem("SuperWall-cart")));
     }
-    console.log(cart);
-  }, []);
+  }, [setCart]);
 
   useEffect(() => {
     let sum = 0;
