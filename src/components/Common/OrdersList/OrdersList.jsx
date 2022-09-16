@@ -10,10 +10,11 @@ export default function OrdersList() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    console.log(userData);
-    getAllOrders(userData.token, userData.email).then((res) => {
-      setOrders(res.data);
-    });
+    if (userData.token) {
+      getAllOrders(userData.token, userData.email).then((res) => {
+        setOrders(res.data);
+      });
+    }
   }, [userData, setOrders]);
 
   return (

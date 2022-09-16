@@ -26,4 +26,19 @@ function getAllOrders(token, email) {
   });
 }
 
-export { postSignUp, postSignIn, getAllProducts, getOneProduct, getAllOrders };
+function getUserByToken(token) {
+  const _token = "Bearer " + token;
+
+  return axios.get(`${BASE_URL}/userToken`, {
+    headers: { Authorization: _token },
+  });
+}
+
+export {
+  postSignUp,
+  postSignIn,
+  getAllProducts,
+  getOneProduct,
+  getAllOrders,
+  getUserByToken,
+};

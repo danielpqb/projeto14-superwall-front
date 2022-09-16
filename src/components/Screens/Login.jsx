@@ -31,6 +31,7 @@ export default function Login() {
           ...userData,
           ...res.data,
         });
+        localStorage.setItem("userToken", res.data.token);
         navigate("/");
       })
       .catch((res) => {
@@ -81,8 +82,6 @@ const Container = styled.div`
 
     font-weight: 700;
     font-size: 15px;
-
-    color: #ffffff;
   }
 `;
 

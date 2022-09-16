@@ -9,7 +9,7 @@ import Icon from "./Icon";
 export default function Header() {
   const navigate = useNavigate();
 
-  const { showSideBar, setShowSideBar } = useContext(UserContext);
+  const { showSideBar, setShowSideBar, userData } = useContext(UserContext);
 
   const [search, setSearch] = useState("");
 
@@ -36,7 +36,9 @@ export default function Header() {
         onClick={() => {
           navigate("/account/login");
         }}
-        name={"person-circle"}
+        name={"person-circle-outline"}
+        size={36}
+        auth={userData.token ? true : false}
       />
     </Container>
   );
@@ -58,13 +60,5 @@ const Container = styled.div`
     z-index: 10;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-
-  h1 {
-    min-width: fit-content;
-    font-weight: 700;
-    font-size: 26px;
-
-    padding: 20px 0px;
   }
 `;

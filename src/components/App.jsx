@@ -14,16 +14,23 @@ import Cart from "./Screens/Cart";
 import Alert from "./Common/Alert";
 import Orders from "./Screens/Orders";
 import Notifications from "./Screens/Notifications";
+import { getUserByToken } from "../services/superwallAPI";
 
 export default function App() {
-  const [userData, setUserData] = useState({ token: null });
+  const [userData, setUserData] = useState({});
   const [showSideBar, setShowSideBar] = useState(false);
   const [cart, setCart] = useState([]);
   const [alert, setAlert] = useState(false);
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+    const localToken = localStorage.getItem("userToken");
+
+    if (localToken) {
+      getUserByToken(localToken).then((res) => {
+        setUserData(res.data);
+      });
+    }
+  }, [setUserData]);
 
   return (
     <Container>
