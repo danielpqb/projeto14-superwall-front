@@ -4,6 +4,7 @@ import styled from "styled-components";
 import InputBox from "./InputBox";
 
 import UserContext from "../../Context/UserContext";
+import Icon from "./Icon";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -18,9 +19,8 @@ export default function Header() {
         onClick={() => {
           setShowSideBar(!showSideBar);
         }}
-      >
-        <ion-icon name="menu"></ion-icon>
-      </Icon>
+        name={"menu"}
+      />
 
       <InputBox
         name={"search"}
@@ -36,9 +36,8 @@ export default function Header() {
         onClick={() => {
           navigate("/");
         }}
-      >
-        <ion-icon name="person-circle"></ion-icon>
-      </Icon>
+        name={"person-circle"}
+      />
     </Container>
   );
 }
@@ -67,19 +66,5 @@ const Container = styled.div`
     font-size: 26px;
 
     padding: 20px 0px;
-  }
-`;
-
-const Icon = styled.div`
-  & {
-    width: fit-content;
-    padding: 0px 20px;
-    cursor: pointer;
-  }
-  ion-icon {
-    font-size: 30px;
-  }
-  &:hover{
-    filter: brightness(0.6)
   }
 `;
