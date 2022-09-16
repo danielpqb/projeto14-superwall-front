@@ -27,7 +27,6 @@ export default function Cart() {
       sum += cart[i].price * cart[i].qnt;
     }
     setTotal(sum);
-    localStorage.setItem("SuperWall-cart", JSON.stringify(cart));
   }, [cart]);
 
   function cleanCart() {
@@ -41,19 +40,21 @@ export default function Cart() {
     }
   }
 
-  function changeQntProduct(item, operation){
-    
-    if (operation === "+"){
+  function changeQntProduct(item, operation) {
+    if (operation === "+") {
       item.qnt += 1;
     } else {
       item.qnt -= 1;
     }
 
-    if (item.qnt === 0){
-      const newCart = cart.filter(product => product._id !== item._id);
-      return setCart(newCart);
+    if (item.qnt === 0) {
+      const newCart = cart.filter((product) => product._id !== item._id);
+      setCart(newCart);
+      localStorage.setItem("SuperWall-cart", JSON.stringify(newCart));
+      return;
     }
-    
+
+    localStorage.setItem("SuperWall-cart", JSON.stringify(cart));
     setCart([...cart]);
   }
 
@@ -69,11 +70,11 @@ export default function Cart() {
           <h2>R$ {item.price.toFixed(2)}</h2>
           <h3>
             Quantidade:
-            <div onClick={() => changeQntProduct(item, '-') }>
+            <div onClick={() => changeQntProduct(item, "-")}>
               <ion-icon name="remove-circle-outline"></ion-icon>
             </div>
             <b>{item.qnt}</b>
-            <div onClick={() => changeQntProduct(item, '+') }>
+            <div onClick={() => changeQntProduct(item, "+")}>
               <ion-icon name="add-circle-outline"></ion-icon>
             </div>
           </h3>
@@ -83,7 +84,6 @@ export default function Cart() {
           <h2>R$</h2>
           <h1>{(item.price * item.qnt).toFixed(2)}</h1>
         </ProductTotal>
-        
       </StyledProduct>
     );
   }
@@ -106,7 +106,13 @@ export default function Cart() {
           <h2>R$ {total.toFixed(2)}</h2>
         </div>
         <div>
-          <Continue onClick={() => { navigate("/payment") }}>Continuar</Continue>
+          <Continue
+            onClick={() => {
+              navigate("/payment");
+            }}
+          >
+            Continuar
+          </Continue>
           <Cancel onClick={cleanCart}>Limpar carrinho de compras</Cancel>
         </div>
       </ToPayment>
@@ -162,27 +168,26 @@ const ImageBox = styled.div`
 `;
 
 const ProductInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 5px 10px;
 
-
-    h1 {
+  h1 {
     font-weight: 300;
     font-size: 12px;
     color: var(--azul-base);
     overflow-y: hidden;
-    }
+  }
 
-    h2 {
+  h2 {
     font-weight: 600;
     font-size: 14px;
     color: var(--azul-base);
-    }
+  }
 
-    h3 {
+  h3 {
     font-weight: 300;
     font-size: 12px;
     color: var(--azul-base);
@@ -202,17 +207,17 @@ const ProductInfo = styled.div`
       color: var(--azul-base);
       border-radius: 50%;
 
-      &:hover{
+      &:hover {
         background-color: var(--azul-base);
         color: white;
       }
 
-      &:active{
-        transform:translateY(2px);
+      &:active {
+        transform: translateY(2px);
       }
     }
-    }
-`
+  }
+`;
 
 const ProductTotal = styled.div`
   width: 100px;
@@ -221,20 +226,19 @@ const ProductTotal = styled.div`
   border-left: var(--azul-base) 1px solid;
   flex-direction: column;
   align-items: flex-start;
-  
+
   h1 {
     font-weight: 700;
     font-size: 16px;
     color: var(--azul-base);
   }
-  
+
   h2 {
     font-weight: 400;
     font-size: 14px;
     color: var(--azul-base);
   }
-`
-
+`;
 
 const ToPayment = styled.div`
   width: 100vw;
