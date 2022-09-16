@@ -35,7 +35,9 @@ const Container = styled.div`
 
 const Badge = styled.div`
   & {
-    background: red;
+    background: #c00000;
+
+    font-size: 14px;
 
     position: absolute;
 
@@ -56,7 +58,7 @@ const Auth = styled.div`
     width: fit-content;
     height: fit-content;
 
-    bottom: 5px;
+    bottom: 8px;
     right: 0px;
   }
   ion-icon {
