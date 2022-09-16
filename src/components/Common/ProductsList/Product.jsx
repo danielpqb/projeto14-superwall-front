@@ -4,7 +4,7 @@ import UserContext from "../../../Context/UserContext";
 
 export default function Product({ productData, onClick }) {
   const { description, price, imgSrc } = productData;
-  const { cart, setCart } = useContext(UserContext);
+  const { cart, setCart, setAlert } = useContext(UserContext);
 
   useEffect(() => {
     if (localStorage.getItem("SuperWall-cart") !== null) {
@@ -13,12 +13,6 @@ export default function Product({ productData, onClick }) {
   }, [setCart]);
 
   function addToCart() {
-    if (
-      !window.confirm("Deseja adicionar este produto ao carrinho de compras?")
-    ) {
-      return;
-    }
-
     const repeatedProduct = cart.find(
       (product) => product.id === productData.id
     );
@@ -48,7 +42,12 @@ export default function Product({ productData, onClick }) {
         </Details>
       </ProductInfo>
 
-      <AddToCart onClick={addToCart}>
+      <AddToCart
+        onClick={() => {
+          addToCart();
+          setAlert({ show: true, message: "Produto adicionado ao carrinho." });
+        }}
+      >
         <ion-icon name="add-circle"></ion-icon>
       </AddToCart>
     </Container>

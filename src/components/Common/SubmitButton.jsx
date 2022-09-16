@@ -27,8 +27,4 @@ const Container = styled.button`
     font-weight: 700;
     font-size: 20px;
   }
-
-  &:hover {
-    opacity: 0.6;
-  }
 `;

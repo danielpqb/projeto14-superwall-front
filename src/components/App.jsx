@@ -11,11 +11,13 @@ import Store from "./Screens/Store";
 import Product from "./Screens/Product";
 
 import Cart from "./Screens/Cart";
+import Alert from "./Common/Alert";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
   const [showSideBar, setShowSideBar] = useState(false);
   const [cart, setCart] = useState([]);
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     //console.log(userData);
@@ -32,9 +34,12 @@ export default function App() {
             setShowSideBar,
             cart,
             setCart,
+            alert,
+            setAlert,
           }}
         >
           <GlobalStyle />
+          {alert.show && <Alert />}
           <Routes>
             <Route path="/" element={<Store />}></Route>
             <Route path="/account/login" element={<Login />}></Route>

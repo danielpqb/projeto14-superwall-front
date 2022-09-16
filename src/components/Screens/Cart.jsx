@@ -8,106 +8,110 @@ import SessionHeader from "../Common/SessionHeader";
 import UserContext from "../../Context/UserContext";
 import { Navigate } from "react-router-dom";
 
-export default function Store() {
-
+export default function Cart() {
   const { showSideBar, cart, setCart } = useContext(UserContext);
-  const [ total, setTotal ] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    if (localStorage.getItem('SuperWall-cart') !== null) {
-        setCart(JSON.parse(localStorage.getItem('SuperWall-cart')));
+    if (localStorage.getItem("SuperWall-cart") !== null) {
+      setCart(JSON.parse(localStorage.getItem("SuperWall-cart")));
     }
     console.log(cart);
   }, []);
 
   useEffect(() => {
     let sum = 0;
-    for(let i = 0; i < cart.length; i ++){
-      sum += ( cart[i].price * cart[i].qnt );
+    for (let i = 0; i < cart.length; i++) {
+      sum += cart[i].price * cart[i].qnt;
     }
     setTotal(sum);
   }, [cart]);
 
-  function cleanCart(){
-    if(window.confirm('Você deseja realmente limpar o carrinho? Esta operação não pode ser desfeita!')){
-        localStorage.removeItem('SuperWall-cart');
-        setCart([]);
+  function cleanCart() {
+    if (
+      window.confirm(
+        "Você deseja realmente limpar o carrinho? Esta operação não pode ser desfeita!"
+      )
+    ) {
+      localStorage.removeItem("SuperWall-cart");
+      setCart([]);
     }
   }
 
-  function Product({item}){
+  function Product({ item }) {
     return (
       <StyledProduct>
         <h6>Produto: {item.description}</h6>
       </StyledProduct>
-    )
+    );
   }
 
   return (
     <Container>
-        <Header></Header>
+      <Header></Header>
 
-        <SessionHeader title={'CARRINHO DE COMPRAS'} />
+      <SessionHeader title={"CARRINHO DE COMPRAS"} />
 
-        {showSideBar ? <Sidebar /> : <></>}
+      {showSideBar ? <Sidebar /> : <></>}
 
-        {cart.map((item, index) => <Product key={index} item={item}/> )}
+      {cart.map((item, index) => (
+        <Product key={index} item={item} />
+      ))}
 
-        <ToPayment>
-          <div>
-            <h1>TOTAL</h1>
-            <h2>R$ {total.toFixed(2)}</h2>
-          </div>
-          <div>
-            <Continue onClick={() => Navigate('/cart')}>Continuar</Continue>
-            <Cancel onClick={cleanCart}>Limpar carrinho de compras</Cancel>
-          </div>
-        </ToPayment>
+      <ToPayment>
+        <div>
+          <h1>TOTAL</h1>
+          <h2>R$ {total.toFixed(2)}</h2>
+        </div>
+        <div>
+          <Continue onClick={() => Navigate("/cart")}>Continuar</Continue>
+          <Cancel onClick={cleanCart}>Limpar carrinho de compras</Cancel>
+        </div>
+      </ToPayment>
 
-        <Footer></Footer>
+      <Footer></Footer>
     </Container>
   );
 }
 
 const Container = styled.div`
-    width: calc(100vw - (100vw - 100%));
-    min-height: 100vh;
+  width: calc(100vw - (100vw - 100%));
+  min-height: 100vh;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 
-    font-weight: 700;
-    font-size: 15px;
+  font-weight: 700;
+  font-size: 15px;
 
-    padding: 70px 0 180px 0;
-    background-color: #f3f3f3;
+  padding: 70px 0 180px 0;
+  background-color: #f3f3f3;
 
-    h1 {
-        color: black;
-    }
+  h1 {
+    color: black;
+  }
 `;
 
 const StyledProduct = styled.div`
+  width: calc(100% - 40px);
+  height: 90px;
 
-    width: calc(100% - 40px);
-    height: 90px;
+  padding: 10px;
+  margin: 10px 20px;
 
-    padding: 10px;
-    margin: 10px 20px;
+  background: #ffffff;
 
-    background: #ffffff;
+  border-radius: 5px;
 
-    border-radius: 5px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-
-    h6 {
-      font-size: 16px;
-      color: var(--azul-base);
-    }
-`
+  h6 {
+    font-size: 16px;
+    color: var(--azul-base);
+  }
+`;
 
 const ToPayment = styled.div`
   width: 100vw;
@@ -134,16 +138,16 @@ const ToPayment = styled.div`
   h2 {
     color: var(--azul-base);
     font-weight: 900;
-    font-size:26px;
+    font-size: 26px;
     margin-top: 10px;
   }
 
   & > div {
-    width:40%;
+    width: 40%;
     display: flex;
     flex-direction: column;
   }
-`
+`;
 
 const Continue = styled.button`
   cursor: pointer;
@@ -158,7 +162,7 @@ const Continue = styled.button`
   &:hover {
     filter: brightness(1.4);
   }
-`
+`;
 
 const Cancel = styled.button`
   cursor: pointer;
@@ -174,4 +178,4 @@ const Cancel = styled.button`
     filter: brightness(0.6);
     font-weight: 500;
   }
-`
+`;

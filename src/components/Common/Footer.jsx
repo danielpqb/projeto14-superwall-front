@@ -18,18 +18,22 @@ export default function Footer() {
           navigate("/");
         }}
         name={"notifications"}
+        size={25}
       />
       <Icon
         onClick={() => {
           navigate("/");
         }}
         name={"receipt"}
+        size={25}
       />
       <Icon
         onClick={() => {
           navigate("/cart");
         }}
         name={"cart"}
+        size={34}
+        badge={true}
       />
     </Container>
   );
@@ -40,7 +44,7 @@ const Container = styled.div`
     justify-content: space-between;
 
     height: 60px;
-    padding: 10px 25px;
+    padding: 10px 15px;
 
     background: var(--azul-base);
 
