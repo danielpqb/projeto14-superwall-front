@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { useContext } from "react";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
-import ProductsList from "../Common/ProductsList/ProductsList";
+import OrdersList from "../Common/OrdersList/OrdersList";
 import Sidebar from "../Common/Sidebar";
 
 import UserContext from "../../Context/UserContext";
 
-export default function Store() {
+export default function Orders() {
   const { showSideBar } = useContext(UserContext);
 
   return (
@@ -16,7 +16,7 @@ export default function Store() {
 
       {showSideBar ? <Sidebar /> : <></>}
 
-      <ProductsList />
+      <OrdersList />
 
       <Footer />
     </Container>

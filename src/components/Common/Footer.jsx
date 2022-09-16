@@ -22,7 +22,7 @@ export default function Footer() {
       />
       <Icon
         onClick={() => {
-          navigate("/");
+          navigate("/orders");
         }}
         name={"receipt"}
         size={25}

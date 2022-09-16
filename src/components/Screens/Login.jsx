@@ -27,13 +27,9 @@ export default function Login() {
 
     postSignIn(form)
       .then((res) => {
-        const { token, email, name } = res.data;
-
         setUserData({
           ...userData,
-          token: token,
-          email: email,
-          name: name,
+          ...res.data,
         });
         navigate("/");
       })

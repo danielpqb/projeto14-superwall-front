@@ -34,7 +34,7 @@ export default function Header() {
 
       <Icon
         onClick={() => {
-          navigate("/");
+          navigate("/account/login");
         }}
         name={"person-circle"}
       />

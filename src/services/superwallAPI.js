@@ -18,4 +18,12 @@ function getOneProduct(id) {
   return axios.get(`${BASE_URL}/products/${id}`);
 }
 
-export { postSignUp, postSignIn, getAllProducts, getOneProduct };
+function getAllOrders(token, email) {
+  const _token = "Bearer " + token;
+
+  return axios.get(`${BASE_URL}/orders`, {
+    headers: { Authorization: _token, email: email },
+  });
+}
+
+export { postSignUp, postSignIn, getAllProducts, getOneProduct, getAllOrders };

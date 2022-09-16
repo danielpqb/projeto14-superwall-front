@@ -12,6 +12,7 @@ import Product from "./Screens/Product";
 
 import Cart from "./Screens/Cart";
 import Alert from "./Common/Alert";
+import Orders from "./Screens/Orders";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
@@ -20,7 +21,7 @@ export default function App() {
   const [alert, setAlert] = useState(false);
 
   useEffect(() => {
-    //console.log(userData);
+    console.log(userData);
   }, [userData]);
 
   return (
@@ -46,6 +47,7 @@ export default function App() {
             <Route path="/account/register" element={<Register />}></Route>
             <Route path="/products/:id" element={<Product />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/orders" element={<Orders />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </UserContext.Provider>
