@@ -1,9 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 
 export default function Order({ orderData, onClick }) {
   const { address, payment, _id, total } = orderData;
-
-  console.log(orderData);
 
   return (
     <Container>
@@ -31,9 +30,9 @@ export default function Order({ orderData, onClick }) {
           </Line>
         </Details>
 
-        {orderData.order.map((order) => {
+        {orderData.order.map((order, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               <Product>
                 <img src={order.imgSrc} alt="" />
                 <ProductInfo>
@@ -55,7 +54,7 @@ export default function Order({ orderData, onClick }) {
                   </Line>
                 </ProductInfo>
               </Product>
-            </>
+            </React.Fragment>
           );
         })}
 
