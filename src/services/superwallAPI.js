@@ -34,8 +34,12 @@ function getUserByToken(token) {
   });
 }
 
-function postOneOrder(order, header) {
-  return axios.post(`${BASE_URL}/orders`, order, header);
+function postOneOrder(token, orderObj) {
+  const _token = "Bearer " + token;
+
+  return axios.post(`${BASE_URL}/orders`, orderObj, {
+    headers: { Authorization: _token },
+  });
 }
 
 function deleteOrderId(id, header) {

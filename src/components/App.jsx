@@ -24,6 +24,7 @@ export default function App() {
   const [showSideBar, setShowSideBar] = useState(false);
   const [cart, setCart] = useState([]);
   const [alert, setAlert] = useState({});
+  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     const localToken = localStorage.getItem("userToken");
@@ -48,6 +49,8 @@ export default function App() {
             setCart,
             alert,
             setAlert,
+            cartTotal,
+            setCartTotal,
           }}
         >
           <GlobalStyle />
