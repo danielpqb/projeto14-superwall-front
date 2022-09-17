@@ -25,7 +25,13 @@ export default function Register() {
       return;
     }
 
-    await postSignUp(form);
+    try {
+      await postSignUp(form);
+      alert('Usuário cadastrado com sucesso!');
+    } catch (error) {
+      alert(`Erro ${error.response.status}: ${error.response.data.message}`);
+      return;
+    }
 
     navigate("/account/login");
   }

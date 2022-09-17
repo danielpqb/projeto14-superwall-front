@@ -62,7 +62,7 @@ export default function Payment() {
         creditCardNumber: paymentForm.creditCardNumber,
       },
       order: cart,
-      total:finalValue.toFixed(2),
+      total: finalValue.toFixed(2),
     }
 
     try {
