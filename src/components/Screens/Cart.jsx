@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import Sidebar from "../Common/Sidebar";
@@ -9,9 +9,8 @@ import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const { showSideBar, cart, setCart, alert, setAlert } =
+  const { showSideBar, cart, setCart, alert, setAlert, cartTotal, setCartTotal} =
     useContext(UserContext);
-  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,8 +24,8 @@ export default function Cart() {
     for (let i = 0; i < cart.length; i++) {
       sum += cart[i].price * cart[i].qnt;
     }
-    setTotal(sum);
-  }, [cart]);
+    setCartTotal(sum);
+  }, [setCartTotal, cart]);
 
   function changeQntProduct(item, operation) {
     if (operation === "+") {
@@ -91,7 +90,7 @@ export default function Cart() {
       <ToPayment>
         <div>
           <h1>TOTAL</h1>
-          <h2>R$ {total.toFixed(2)}</h2>
+          <h2>R$ {cartTotal.toFixed(2)}</h2>
         </div>
         <div>
           <Continue

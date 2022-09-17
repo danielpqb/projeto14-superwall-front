@@ -3,6 +3,8 @@ import styled from "styled-components";
 export default function Order({ orderData, onClick }) {
   const { description, price, imgSrc } = orderData;
 
+  console.log(orderData);
+
   return (
     <Container>
       <OrderInfo onClick={onClick}>
@@ -12,7 +14,7 @@ export default function Order({ orderData, onClick }) {
 
         <Details>
           <h1>{description}</h1>
-          <h2>$ {price.toFixed(2)}</h2>
+          <h2>$ {Number(price).toFixed(2)}</h2>
         </Details>
       </OrderInfo>
     </Container>
