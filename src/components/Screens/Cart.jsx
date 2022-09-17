@@ -9,7 +9,8 @@ import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const { showSideBar, cart, setCart } = useContext(UserContext);
+  const { showSideBar, cart, setCart, alert, setAlert } =
+    useContext(UserContext);
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
 
@@ -26,17 +27,6 @@ export default function Cart() {
     }
     setTotal(sum);
   }, [cart]);
-
-  function cleanCart() {
-    if (
-      window.confirm(
-        "Você deseja realmente limpar o carrinho? Esta operação não pode ser desfeita!"
-      )
-    ) {
-      localStorage.removeItem("SuperWall-cart");
-      setCart([]);
-    }
-  }
 
   function changeQntProduct(item, operation) {
     if (operation === "+") {
@@ -111,7 +101,24 @@ export default function Cart() {
           >
             Continuar
           </Continue>
-          <Cancel onClick={cleanCart}>Limpar carrinho de compras</Cancel>
+          <Cancel
+            onClick={() =>
+              setAlert({
+                ...alert,
+                show: true,
+                message: "Deseja remover todos os itens do carrinho?",
+                type: 1,
+                doThis: () => {
+                  localStorage.removeItem("SuperWall-cart");
+                  setCart([]);
+                },
+                color: "rgba(200,0,0)",
+                icon: "alert-circle",
+              })
+            }
+          >
+            Limpar carrinho de compras
+          </Cancel>
         </div>
       </ToPayment>
 

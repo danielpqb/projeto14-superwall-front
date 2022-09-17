@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 import UserContext from "../../Context/UserContext";
 
 export default function ProductInfo({ productData }) {
-  const { cart, setCart, setAlert } = useContext(UserContext);
+  const { cart, setCart, alert, setAlert } = useContext(UserContext);
   const navigate = useNavigate();
   const now = dayjs(Date.now());
   const { description, price, imgSrc } = productData;
@@ -63,6 +63,7 @@ export default function ProductInfo({ productData }) {
 
             addToCart();
             setAlert({
+              ...alert,
               show: true,
               message: "Produto adicionado ao carrinho.",
             });

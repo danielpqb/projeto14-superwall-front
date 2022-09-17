@@ -11,14 +11,52 @@ export default function Alert() {
       <Blur />
 
       <Container>
-        <Message>{alert.message}</Message>
-        <SubmitButton
-          onClick={() => {
-            setAlert({ show: false });
-          }}
-        >
-          Ok
-        </SubmitButton>
+        <AlertIcon color={alert.color}>
+          <ion-icon
+            name={alert.icon ? alert.icon : "checkmark-circle"}
+          ></ion-icon>
+        </AlertIcon>
+
+        <Message>{alert.message ? alert.message : "Alerta!"}</Message>
+
+        {alert.type === 1 ? (
+          <>
+            <ColoredButton color={alert.color} fontColor={alert.fontColor}>
+              <SubmitButton
+                onClick={() => {
+                  alert.doThis();
+                  setAlert({});
+                }}
+              >
+                Ok
+              </SubmitButton>
+            </ColoredButton>
+
+            <ColoredButton color={"#ececec"} fontColor={"#505050"}>
+              <SubmitButton
+                onClick={() => {
+                  setAlert({});
+                }}
+              >
+                Cancelar
+              </SubmitButton>
+            </ColoredButton>
+          </>
+        ) : alert.type === 2 ? (
+          <></>
+        ) : (
+          <>
+            <ColoredButton color={alert.color} fontColor={alert.fontColor}>
+              <SubmitButton
+                onClick={() => {
+                  setAlert({});
+                }}
+              >
+                Ok
+              </SubmitButton>
+            </ColoredButton>
+          </>
+        )}
       </Container>
     </>
   );
@@ -42,10 +80,15 @@ const Container = styled.div`
     padding: 15px;
 
     width: 90vw;
-    height: 200px;
+    height: fit-content;
 
-    background: rgba(220, 220, 220, 1);
-    border: 3px solid rgba(0, 0, 0, 0.8);
+    background: rgba(245, 245, 245, 1);
+
+    box-shadow: -5px -5px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  button {
+    margin-top: 10px;
   }
 `;
 
@@ -66,5 +109,32 @@ const Message = styled.div`
   && {
     color: black;
     font-size: 20px;
+
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+`;
+
+const AlertIcon = styled.div`
+  && {
+    position: absolute;
+
+    top: -35px;
+    background: rgba(245, 245, 245, 1);
+    border-radius: 50%;
+
+    width: fit-content;
+    height: fit-content;
+  }
+  ion-icon {
+    color: ${({ color }) => (color ? color : "var(--azul-destaque)")};
+    font-size: 70px;
+  }
+`;
+
+const ColoredButton = styled.div`
+  button {
+    background: ${({ color }) => color};
+    color: ${({ fontColor }) => fontColor};
   }
 `;
