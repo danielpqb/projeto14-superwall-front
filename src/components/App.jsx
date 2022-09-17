@@ -23,7 +23,7 @@ export default function App() {
   const [userData, setUserData] = useState({});
   const [showSideBar, setShowSideBar] = useState(false);
   const [cart, setCart] = useState([]);
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState({});
 
   useEffect(() => {
     const localToken = localStorage.getItem("userToken");

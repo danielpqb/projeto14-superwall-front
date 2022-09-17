@@ -32,7 +32,7 @@ const Container = styled.div`
     background-color: #f3f3f3;
   }
 
-  div {
+  & > div {
     color: black;
     font-size: 22px;
     text-align: center;
