@@ -3,7 +3,6 @@ import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getAllProducts } from "../../../services/superwallAPI";
-import Orders from "../../Screens/Orders";
 import SessionHeader from "../SessionHeader";
 import Product from "./Product";
 
