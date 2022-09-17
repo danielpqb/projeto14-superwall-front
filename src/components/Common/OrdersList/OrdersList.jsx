@@ -13,6 +13,7 @@ export default function OrdersList() {
     if (userData.token) {
       getAllOrders(userData.token, userData.email).then((res) => {
         setOrders(res.data);
+        console.log(res.data);
       });
     }
   }, [userData, setOrders]);
@@ -34,7 +35,7 @@ const Container = styled.div`
   & {
     width: calc(100vw - (100vw - 100%));
 
-    flex-wrap: wrap;
+    flex-direction: column;
 
     padding: 20px 0px;
 

@@ -30,6 +30,8 @@ const Container = styled.div`
 
     flex-direction: column;
 
+    justify-content: flex-start;
+
     font-weight: 700;
     font-size: 15px;
 
