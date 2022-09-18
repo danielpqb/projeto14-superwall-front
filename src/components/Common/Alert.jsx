@@ -88,7 +88,11 @@ const Container = styled.div`
   }
 
   button {
+    cursor: pointer;
     margin-top: 10px;
+    &:hover{
+      filter: brightness(0.6);
+    }
   }
 `;
 
