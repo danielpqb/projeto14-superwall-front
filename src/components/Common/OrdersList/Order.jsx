@@ -115,27 +115,26 @@ const OrderInfo = styled.div`
 
 const Details = styled.div`
   & {
+    border-top: 3px solid rgba(0, 0, 0, 0.25);
     flex-direction: column;
+    margin-top: 5px;
   }
 `;
 
 const Header = styled.div`
   & {
     justify-content: space-between;
-
-    padding-bottom: 10px;
-
-    border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+    padding-bottom: 10px;   
   }
 
   div {
     font-weight: 400;
-
     width: fit-content;
   }
 
   div:nth-child(2) {
     font-weight: 600;
+    text-decoration: underline;
     color: var(--azul-destaque);
 
   }

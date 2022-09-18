@@ -35,6 +35,11 @@ export default function ProductInfo({ productData }) {
     localStorage.setItem("SuperWall-cart", JSON.stringify(newCart));
   }
 
+  function handleBuyNow() {
+    addToCart();
+    navigate('/cart');
+  }
+
   return (
     <Container>
       <Description>{description}</Description>
@@ -54,7 +59,7 @@ export default function ProductInfo({ productData }) {
       </Shipping>
 
       <Buttons>
-        <SubmitButton onClick={() => {}}>Comprar agora</SubmitButton>
+        <SubmitButton onClick={handleBuyNow}>Comprar agora</SubmitButton>
         <SubmitButton
           onClick={() => {
             if (!productData._id) {
@@ -159,8 +164,13 @@ const Buttons = styled.div`
   }
 
   button {
+    cursor: pointer;
     margin: 5px 0px;
     font-weight: 500;
+
+    &:hover{
+      filter: brightness(0.6);
+    }
   }
 
   button:nth-child(2) {

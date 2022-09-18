@@ -117,7 +117,7 @@ const Details = styled.div`
   h1,
   h2 {
     width: 100%;
-    color: black;
+    color: var(--azul-base);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -128,7 +128,6 @@ const Details = styled.div`
   }
 
   h2 {
-    font-family: "Roboto";
     font-weight: bold;
     font-size: 16px;
   }
