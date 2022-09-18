@@ -9,13 +9,22 @@ export default function Sidebar() {
 
   const navigate = useNavigate();
 
-  const { setShowSideBar } = useContext(UserContext);
+  const { setShowSideBar, userData } = useContext(UserContext);
+  const loginMenu = {iconName: 'person-circle', legend: '', route:'' }
+
+  if (userData.name){
+    loginMenu.legend = 'Bem vinde ' + userData.name;
+    loginMenu.route = '/';
+  } else {
+    loginMenu.legend = 'Entre ou crie sua conta';
+    loginMenu.route = '/login';
+  }
 
   const menuItens = [
-    {iconName: 'person-circle', legend: 'Entre ou crie sua conta', route:'/' },
-    {iconName: 'notifications', legend: 'Promoções', route:'/' },
-    {iconName: 'receipt', legend: 'Compras anteriores', route:'/' },
-    {iconName: 'cart', legend: 'Carrinho de compras', route:'/' },
+    loginMenu,
+    {iconName: 'notifications', legend: 'Promoções', route:'/notifications' },
+    {iconName: 'receipt', legend: 'Compras anteriores', route:'/orders' },
+    {iconName: 'cart', legend: 'Carrinho de compras', route:'/cart' },
   ];
 
   const sessions = [
@@ -29,7 +38,6 @@ export default function Sidebar() {
   function Item({item}) {
     return (
       <StyledItem onClick={() => {
-        alert(item.legend);
         setShowSideBar(false);
         navigate(item.route);
       }}>
@@ -45,7 +53,6 @@ export default function Sidebar() {
   function Session({session}) {
     return (
       <StyledSession onClick={() => {
-        alert(session.title);
         setShowSideBar(false);
         navigate(session.route);
       }}>
@@ -58,6 +65,11 @@ export default function Sidebar() {
     <Container>
 
       <SideMenu>
+
+      <SessionHeader>
+          <img src={logoBlue} alt=""/>
+          <h3>SUPERWALL</h3>
+        </SessionHeader>
 
         <MenuItens>
           {menuItens.map((item, index) => <Item key={index} item={item} />)}
@@ -120,7 +132,6 @@ const MenuItens = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding-top:20px;
 `
 
 const StyledItem = styled.div`

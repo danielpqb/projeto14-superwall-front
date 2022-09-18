@@ -9,9 +9,29 @@ import Icon from "./Icon";
 export default function Header() {
   const navigate = useNavigate();
 
-  const { showSideBar, setShowSideBar, userData } = useContext(UserContext);
+  const { showSideBar, setShowSideBar, userData, setUserData, alert, setAlert } = useContext(UserContext);
 
   const [search, setSearch] = useState("");
+
+  function handleLoginLogout(){
+    if (userData.token) {
+      setAlert({
+        ...alert,
+        show: true,
+        message: "Deseja fazer logout?",
+        type: 1,
+        doThis: () => {
+          localStorage.removeItem("userToken");
+          setUserData({});
+          navigate('/')
+        },
+        color: "rgba(200,0,0)",
+        icon: "alert-circle",
+      })
+    } else {
+      navigate('/account/login')
+    }
+  }
 
   return (
     <Container>
@@ -33,9 +53,7 @@ export default function Header() {
       />
 
       <Icon
-        onClick={() => {
-          navigate("/account/login");
-        }}
+        onClick={handleLoginLogout}
         name={"person-circle-outline"}
         size={36}
         auth={userData.token ? true : false}

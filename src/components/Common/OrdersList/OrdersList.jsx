@@ -15,7 +15,7 @@ export default function OrdersList() {
   useEffect(() => {
     if (userData.token) {
       getAllOrders(userData.token, userData.email).then((res) => {
-        setOrders(res.data);
+        setOrders(res.data.reverse());
         setLoading(false);
       });
     }

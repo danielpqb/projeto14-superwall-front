@@ -19,6 +19,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -36,6 +37,7 @@ export default function Login() {
       })
       .catch((res) => {
         setIsSubmitDisabled(false);
+        alert(`Erro ${res.response.status}: ${res.response.data.message}`)
         throw res;
       });
   }
@@ -55,13 +57,18 @@ export default function Login() {
         />
         <InputBox
           name="password"
-          type="password"
+          type={showPassword? 'text' : 'password'}
           placeholder="Senha"
           onChange={(e) => {
             setForm({ ...form, password: e.target.value });
           }}
           value={form.password}
         />
+
+        {showPassword?
+          <h2 onClick={() => setShowPassword(false)}>Ocultar senha</h2> :
+          <h2 onClick={() => setShowPassword(true)}>Exibir senha</h2>
+        }
 
         <SubmitButton disabled={isSubmitDisabled}>Entrar</SubmitButton>
       </RegisterForm>
@@ -93,5 +100,16 @@ const RegisterForm = styled.form`
     height: 50%;
 
     text-align: center;
+  }
+
+  h2 {
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 10px;
+    text-decoration: underline;
+    &:hover{
+      filter:brightness(0.6);
+    }
   }
 `;

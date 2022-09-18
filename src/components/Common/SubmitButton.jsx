@@ -20,11 +20,16 @@ export default function SubmitButton({ children, disabled, onClick }) {
 
 const Container = styled.button`
   & {
+    cursor: pointer;
     background: var(--azul-destaque);
     height: 50px;
     border-radius: 5px;
 
     font-weight: 700;
     font-size: 20px;
+
+    &:hover{
+      filter: brightness(0.8);
+    }
   }
 `;

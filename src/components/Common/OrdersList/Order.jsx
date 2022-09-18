@@ -1,62 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import dayjs from "dayjs";
 
 export default function Order({ orderData, onClick }) {
-  const { address, payment, _id, total } = orderData;
+  const { date, address, payment, _id, total } = orderData;
+  const [dropdown, setDropdown ] = useState(false);
 
   return (
     <Container>
       <OrderInfo onClick={onClick}>
         <Header>
-          <div>{"17 de agosto"}</div>
+          <div>{date? dayjs(date).format('DD/MM/YYYY') : '00/00/0000'}</div>
+          {dropdown?
+            <div onClick={() => setDropdown(false)}>Ocultar Detalhes</div>
+            :
+            <div onClick={() => setDropdown(true)}>Exibir Detalhes</div>
+          }
           <div>{_id}</div>
         </Header>
 
-        <Details>
-          <Line>
-            <div>Endereço:</div>
-            <div>{address}</div>
-          </Line>
-          <Line>
-            <div>Cartão (final):</div>
-            <div>{payment.creditCardNumber.replace(/(.*)(\d{4})/g, "$2")}</div>
-          </Line>
-          <Line>
-            <div>Recebedor:</div>
-            <div>{payment.paymentName}</div>
-          </Line>
-          <Line>
-            <div>Produtos:</div>
-          </Line>
-        </Details>
+        {dropdown?
+          <>
+            <Details>
+              <Line>
+                <div>Endereço:</div>
+                <div>{address}</div>
+              </Line>
+              <Line>
+                <div>Cartão (final):</div>
+                <div>{payment.creditCardNumber.replace(/(.*)(\d{4})/g, "$2")}</div>
+              </Line>
+              <Line>
+                <div>Recebedor:</div>
+                <div>{payment.paymentName}</div>
+              </Line>
+              <Line>
+                <div>Produtos:</div>
+              </Line>
+            </Details>
 
-        {orderData.order.map((order, index) => {
-          return (
-            <React.Fragment key={index}>
-              <Product>
-                <img src={order.imgSrc} alt="" />
-                <ProductInfo>
-                  <Line>
-                    <div>Descrição:</div>
-                    <div>{order.description}</div>
-                  </Line>
-                  <Line>
-                    <div>Categoria:</div>
-                    <div>{order.category}</div>
-                  </Line>
-                  <Line>
-                    <div>Qnt:</div>
-                    <div>{order.qnt}</div>
-                  </Line>
-                  <Line>
-                    <div>Preço:</div>
-                    <div>$ {Number(order.price * order.qnt).toFixed(2)}</div>
-                  </Line>
-                </ProductInfo>
-              </Product>
-            </React.Fragment>
-          );
-        })}
+            {orderData.order.map((order, index) => {
+              return (
+                <React.Fragment key={index}>
+                  <Product>
+                    <img src={order.imgSrc} alt="" />
+                    <ProductInfo>
+                      <Line>
+                        <div>Descrição:</div>
+                        <div>{order.description}</div>
+                      </Line>
+                      <Line>
+                        <div>Categoria:</div>
+                        <div>{order.category}</div>
+                      </Line>
+                      <Line>
+                        <div>Qnt:</div>
+                        <div>{order.qnt}</div>
+                      </Line>
+                      <Line>
+                        <div>Preço:</div>
+                        <div>$ {Number(order.price * order.qnt).toFixed(2)}</div>
+                      </Line>
+                    </ProductInfo>
+                  </Product>
+                </React.Fragment>
+              );
+            })}
+          </>
+          
+          :
+
+          <></>
+        }
 
         <Total>Total: $ {Number(total).toFixed(2)}</Total>
       </OrderInfo>
@@ -87,7 +102,7 @@ const Container = styled.div`
   }
 
   div {
-    color: black;
+    color: var(--azul-base);
   }
 `;
 
@@ -100,27 +115,32 @@ const OrderInfo = styled.div`
 
 const Details = styled.div`
   & {
+    border-top: 3px solid rgba(0, 0, 0, 0.25);
     flex-direction: column;
+    margin-top: 5px;
   }
 `;
 
 const Header = styled.div`
   & {
     justify-content: space-between;
-
-    padding-bottom: 10px;
-
-    border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+    padding-bottom: 10px;   
   }
 
   div {
-    font-weight: 500;
-
+    font-weight: 400;
     width: fit-content;
   }
 
   div:nth-child(2) {
-    font-size: 12px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: var(--azul-destaque);
+
+  }
+
+  div:nth-child(3) {
+    font-size: 10px;
   }
 `;
 
