@@ -66,6 +66,11 @@ export default function Sidebar() {
 
       <SideMenu>
 
+      <SessionHeader>
+          <img src={logoBlue} alt=""/>
+          <h3>SUPERWALL</h3>
+        </SessionHeader>
+
         <MenuItens>
           {menuItens.map((item, index) => <Item key={index} item={item} />)}
         </MenuItens>
@@ -127,7 +132,6 @@ const MenuItens = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding-top:20px;
 `
 
 const StyledItem = styled.div`

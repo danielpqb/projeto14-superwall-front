@@ -1,18 +1,16 @@
 import styled from "styled-components";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import Sidebar from "../Common/Sidebar";
 
 import UserContext from "../../Context/UserContext";
+import logoFullWhite from "../../assets/img/logo-full-white.svg";
 
 export default function Confirmation() {
-  const { showSideBar, setCart } = useContext(UserContext);
-
-  useEffect(() => {
-    localStorage.removeItem("SuperWall-cart");
-    setCart([]);
-  }, [setCart]);
+  const { showSideBar } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -20,7 +18,13 @@ export default function Confirmation() {
 
       {showSideBar ? <Sidebar /> : <></>}
 
-      <h1>Confirmação de Compra</h1>
+      <h1>Compra concluída com sucesso! <br /> Agradecemos a preferência!</h1>
+
+      <span>
+        <img src={logoFullWhite} alt="" />
+      </span>
+      
+      <h2 onClick={() => navigate('/')}>Clique aqui para retornar à tela inicial</h2>
 
       <Footer></Footer>
     </Container>
@@ -34,7 +38,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
 
   font-weight: 700;
   font-size: 15px;
@@ -43,6 +47,34 @@ const Container = styled.div`
   background-color: #f3f3f3;
 
   h1 {
-    color: black;
+    font-weight: 800;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    color: var(--azul-base);
+  }
+
+  span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--azul-destaque);
+  }
+
+  img {
+    width: 60%;
+  }
+
+  h2 {
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    color: var(--azul-base);
+    &:hover{
+      font-weight:600;
+    }
   }
 `;
