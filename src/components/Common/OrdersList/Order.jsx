@@ -4,22 +4,22 @@ import dayjs from "dayjs";
 
 export default function Order({ orderData, onClick }) {
   const { date, address, payment, _id, total } = orderData;
-  const [dropdown, setDropdown ] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
   return (
     <Container>
       <OrderInfo onClick={onClick}>
         <Header>
-          <div>{date? dayjs(date).format('DD/MM/YYYY') : '00/00/0000'}</div>
-          {dropdown?
+          <div>{date ? dayjs(date).format("DD/MM/YYYY") : "00/00/0000"}</div>
+          {dropdown ? (
             <div onClick={() => setDropdown(false)}>Ocultar Detalhes</div>
-            :
+          ) : (
             <div onClick={() => setDropdown(true)}>Exibir Detalhes</div>
-          }
+          )}
           <div>{_id}</div>
         </Header>
 
-        {dropdown?
+        {dropdown ? (
           <>
             <Details>
               <Line>
@@ -28,7 +28,9 @@ export default function Order({ orderData, onClick }) {
               </Line>
               <Line>
                 <div>Cartão (final):</div>
-                <div>{payment.creditCardNumber.replace(/(.*)(\d{4})/g, "$2")}</div>
+                <div>
+                  {payment.creditCardNumber.replace(/(.*)(\d{4})/g, "$2")}
+                </div>
               </Line>
               <Line>
                 <div>Recebedor:</div>
@@ -59,7 +61,9 @@ export default function Order({ orderData, onClick }) {
                       </Line>
                       <Line>
                         <div>Preço:</div>
-                        <div>$ {Number(order.price * order.qnt).toFixed(2)}</div>
+                        <div>
+                          $ {Number(order.price * order.qnt).toFixed(2)}
+                        </div>
                       </Line>
                     </ProductInfo>
                   </Product>
@@ -67,11 +71,9 @@ export default function Order({ orderData, onClick }) {
               );
             })}
           </>
-          
-          :
-
+        ) : (
           <></>
-        }
+        )}
 
         <Total>Total: $ {Number(total).toFixed(2)}</Total>
       </OrderInfo>
@@ -124,7 +126,7 @@ const Details = styled.div`
 const Header = styled.div`
   & {
     justify-content: space-between;
-    padding-bottom: 10px;   
+    padding-bottom: 10px;
   }
 
   div {
@@ -136,7 +138,6 @@ const Header = styled.div`
     font-weight: 600;
     text-decoration: underline;
     color: var(--azul-destaque);
-
   }
 
   div:nth-child(3) {
