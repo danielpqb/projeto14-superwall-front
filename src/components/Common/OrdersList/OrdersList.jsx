@@ -41,7 +41,7 @@ export default function OrdersList() {
         ) : (
           <Message>Você ainda não possui um histórico de compras.</Message>
         )
-      ) : (
+      ) : userData.token ? (
         <Loading>
           <ThreeDots
             align="center"
@@ -50,6 +50,8 @@ export default function OrdersList() {
             ariaLabel="three-dots-loading"
           />
         </Loading>
+      ) : (
+        <Message>Você não está conectado a uma conta.</Message>
       )}
     </Container>
   );
