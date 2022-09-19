@@ -31,8 +31,8 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (form.password !== form.confirmPassword) {
-      alert("Password and ConfirmPassword must be equal!");
+    if (!(validateLength && validateNumbers && validateUpperCase && validateSymbols && validateConfirmation)) {
+      alert("Senha inválida!");
       return;
     }
 
@@ -142,7 +142,7 @@ export default function Register() {
         <></> :
         <ValidationBox>
           {validateConfirmation?
-            <h3 style={{ color: "lightgreen" }}>• As senhas não conferem</h3> :
+            <h3 style={{ color: "lightgreen" }}>• As senhas conferem</h3> :
             <h3 style={{ color: "red" }}>• As senhas não conferem</h3>
           }
         </ValidationBox>

@@ -14,7 +14,7 @@ export default function Product({ productData, onClick }) {
 
   function addToCart() {
     const repeatedProduct = cart.find(
-      (product) => product.id === productData.id
+      (product) => product._id === productData._id
     );
     let newCart;
 
