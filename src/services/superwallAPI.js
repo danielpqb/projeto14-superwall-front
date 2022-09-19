@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://superwall-store.herokuapp.com/";
 
 function postSignUp(user) {
   return axios.post(`${BASE_URL}/account/register`, user);
